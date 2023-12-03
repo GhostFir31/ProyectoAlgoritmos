@@ -9,14 +9,16 @@ import java.util.ArrayList;
  * @author JesusOmar Leal
  */
 public class ProyectoAlgoritmos {
-
     public static void main(String[] args) {
-        Metodos metodo = new Metodos();
-        ArrayList<Integer> vector = metodo.generarNumeros(10, 5);
-
-        System.out.println("Números generados:");
-        for(int i = 0; i < vector.size(); i++){
-            System.out.println(vector.get(i));
+        ArbolBinarioBalanceado arbolBinario = new ArbolBinarioBalanceado();
+        
+        // Insertar 10 nodos en el árbol
+        for(int i = 0; i < 2; i++){
+            arbolBinario.insertaNodo(i);
         }
+        
+        // Realizar recorrido preorden e imprimir los valores
+        System.out.println("Recorrido Preorden: ");
+        arbolBinario.recorridoPreOrden(arbolBinario.raiz);
     }
 }
