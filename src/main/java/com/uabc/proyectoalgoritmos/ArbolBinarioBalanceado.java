@@ -138,4 +138,22 @@ public class ArbolBinarioBalanceado {
             preAux=aux;
         }
     }
+    
+    public void recorridoPreOrden(Nodo r){
+        Nodo actual=r,padre;
+        if(actual==null)
+            System.out.println("Arbol vacío");
+        
+        if(actual.getIzquierda()!=null){
+            System.out.println("["+actual.getValor()+"]");
+            recorridoPreOrden(actual.getIzquierda());
+        }
+        else
+            System.out.println("["+actual.getValor()+"]");
+        
+        if(actual.getDerecha()!=null){
+            recorridoPreOrden(actual.getDerecha());
+        }
+            
+    }
 }
