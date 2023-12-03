@@ -27,13 +27,13 @@ public class ProyectoAlgoritmos {
         Scanner ent = new Scanner(System.in);
         int opcion, valor;
         
-            System.out.println("1... Generar ArrayList\n2... Insertar ArrayList\n3... Inserta Numero\4... \n5...PreOrden");
+            System.out.println("1... Generar ArrayList\n2... Insertar ArrayList\n3... Inserta Numero\4... \n5...PreOrden\n6... PostOrden");
             System.out.println("Escoge opción");
             opcion = ent.nextInt();
             
             switch(opcion){
                 case 1:
-                    System.out.println("Escribe el tam del arraylist");
+                    System.out.println("Escribe el tam del arraylist y después el valor máximo que puede alcanzar");
                     arreglo = metodo.generarNumeros(ent.nextInt(), ent.nextInt());
                     System.out.println(arreglo);
                 break;
@@ -50,6 +50,10 @@ public class ProyectoAlgoritmos {
                 
                 case 5:
                     preOrden();
+                break;
+                
+                case 6:
+                    postOrden();
                 break;
             }
     }
@@ -77,5 +81,9 @@ public class ProyectoAlgoritmos {
     
     public void preOrden(){
         arbol.recorridoPreOrden(arbol.getRaiz());
+    }
+    
+    public void postOrden(){
+        arbol.recorridoPostOrden(arbol.getRaiz());
     }
 }

@@ -14,7 +14,7 @@ public class Metodos {
     private ArrayList<Integer> vector = new ArrayList<>();
     private Random random = new Random();
     
-    public ArrayList generarNumeros(int k, int n){
+    public ArrayList generarNumeros(int n, int k){
         for (int i = 0;i < n; i++){
             vector.add(random.nextInt(k)+1);
         }

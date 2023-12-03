@@ -48,6 +48,20 @@ public class ArbolBinarioBalanceado {
         }         
     }
     
+    public void recorridoPostOrden(Nodo r){
+        if(r==null)
+            System.out.println("Arbol vacío");
+        else{
+            if(r.getIzquierda()!=null)
+                recorridoPostOrden(r.getIzquierda());
+            
+            if(r.getDerecha()!=null)
+                recorridoPostOrden(r.getDerecha());
+            
+            System.out.println("["+r.getValor()+"]");
+        }
+    }
+    
     public Nodo getRaiz(){
         return raiz;
     }
