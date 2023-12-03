@@ -7,153 +7,108 @@ public class ArbolBinarioBalanceado {
         this.raiz=null;
     }
     
-    public void insertaNodo(int valor){
-        Nodo n = new Nodo(valor);
-        //No hay nodos en el árbol
-        if(raiz==null)
-            raiz=n;
+    public void insertaNodo(int valor,Nodo actual){
+        Nodo agregado;
+        
+        if(actual==null)
+            raiz=new Nodo(valor);
         else{
-            Nodo aux = raiz;
-            while(aux!=null){
-                //Si el nodo no posee hijos
-                if(aux.getDerecha()==null && aux.getIzquierda()==null)
-                    if(n.getValor()>aux.getValor()){
-                        aux.setDerecha(n);
-                        break;
-                    }
-                    else{
-                        aux.setIzquierda(n);
-                        break;
-                    }  
-                //El nodo no posee hijo a la derecha
-                //y el valor es mayor al del nodo
-                else if(n.getValor()>aux.getValor() && aux.getDerecha()==null){
-                    aux.setDerecha(n);
-                    break;
-                }
-                //El nodo no posee hijos izquierda
-                //Y el valor es menor al del nodo
-                else if(n.getValor()<aux.getValor() && aux.getIzquierda()==null){
-                    aux.setIzquierda(n);
-                    break;
-                }
-                //Pasamos al siguiente nodo
+            if(valor<actual.getValor()){
+                if(actual.getIzquierda()!=null)
+                    insertaNodo(valor,actual.getIzquierda());
                 else{
-                    if(n.getValor()>aux.getValor())
-                        aux.getDerecha();
-                    else
-                        aux.getIzquierda();
+                    actual.setIzquierda(new Nodo(valor));
                 }
             }
-        }
+            else if(valor>actual.getValor()){
+                if(actual.getDerecha()!=null)
+                    insertaNodo(valor,actual.getDerecha());
+                else{
+                    actual.setDerecha(new Nodo(valor));
+                }
+            }                
+        }      
     }
     
-    public void eliminarNodo(int valor){
-        Nodo aux = raiz;
-        //Si el nodo es raíz
-        if(valor==raiz.getValor()){
-            //si tiene nodo derecho
-            if(raiz.getDerecha()!=null){
-                raiz=raiz.getDerecha();
-                //sí hay nodo izquierdo
-                if(aux.getIzquierda()!=null){
-                    //Insertamos nodo izquierdo con
-                    //todo lo que acarrea
-                    insertaNodo(aux.getIzquierda().valor);
-                }
-                //Desligamos el nodo eliminado
-                aux.setIzquierda(null);
-                aux.setDerecha(null);
-            }
-            //Si solo hay un nodo izquierdo
-            else if(aux.getIzquierda()!=null){
-                //La raíz se vuelve el nodo izquierdo
-                raiz=aux.getIzquierda();
-                aux.setIzquierda(null);
-                aux.setDerecha(null);
-            }
-            //Si no hay nodos en el árbol este se vacía
-            else
-                raiz=null;
+    public Nodo eliminarRecursivo(Nodo raizActual, int valor) {
+    if (raizActual == null) {
+        return raizActual;
+    }
+
+    if (valor < raizActual.getValor()) {
+        raizActual.setIzquierda(eliminarRecursivo(raizActual.getIzquierda(), valor));
+    } else if (valor > raizActual.getValor()) {
+        raizActual.setDerecha(eliminarRecursivo(raizActual.getDerecha(), valor));
+    } else {
+        // Caso 1: Nodo con un solo hijo o sin hijos
+        if (raizActual.getIzquierda() == null) {
+            return raizActual.getDerecha();
+        } else if (raizActual.getDerecha() == null) {
+            return raizActual.getIzquierda();
         }
-        else{
-            Nodo preAux = raiz;
-            //Avanzamos al sig Nodo
-            if(valor>raiz.getValor())
-                aux = aux.getDerecha();
-            else
-                aux = aux.getIzquierda();
-            
-            while(aux!=null){
-                //si encontramos el valor
-                if(aux.getValor()==valor)
-                    //si el nodo es el hijo derecho de su padre
-                    if(aux==preAux.getDerecha()){
-                        //Si el nodo actual rtiene derecho
-                        if(aux.getDerecha()!=null){
-                            //El nodo derecho se pone en su lugar
-                            preAux.setDerecha(aux.getDerecha());
-                            //Si tiene izquierdo
-                            //El nodo derecho se pone en su lugar
-                            preAux.setDerecha(aux.getDerecha());
-                            //Si tiene izquierdo
-                            if(aux.getIzquierda()!=null)
-                                //lo reinertamos
-                                insertaNodo(aux.getIzquierda().valor);
-                            aux.setIzquierda(null);
-                            aux.setDerecha(null);
-                            break;
-                        }
-                        //Si solo tiene lado izquierdo
-                        else if(aux.getIzquierda()!=null){
-                            //Esto quiere decir que el nodo
-                            //derecho del padro ahora es
-                            //nodo izquierdo del actual
-                            preAux.setDerecha(aux.getIzquierda());
-                            aux.setIzquierda(null);
-                            aux.setDerecha(null);
-                        }
-                        else
-                            //Si no tiene hijos el nodo actual
-                            //entonces la derecha del padre apunta
-                            preAux.setDerecha(null);
-                    }
-                    else{
-                        if(preAux.getDerecha()!=null){
-                           preAux.setIzquierda(aux.getDerecha());
-                           if(aux.getIzquierda()!=null)
-                               insertaNodo(aux.getIzquierda().getValor());
-                           aux.setIzquierda(null);
-                           aux.setDerecha(null);
-                        }
-                        else if(aux.getIzquierda()!=null){
-                           preAux.setIzquierda(aux.getIzquierda());
-                           aux.setIzquierda(null);
-                           aux.setDerecha(null);
-                        }
-                        else
-                            preAux.setIzquierda(null);
-                    }  
-            }
-            preAux=aux;
+
+        // Caso 2: Nodo con dos hijos
+        // Encontrar el sucesor inmediato (el menor valor en el subárbol derecho)
+        raizActual.setValor(encontrarMinimo(raizActual.getDerecha()).getValor());
+
+        // Eliminar el sucesor inmediato del subárbol derecho
+        raizActual.setDerecha(eliminarRecursivo(raizActual.getDerecha(), raizActual.getValor()));
+    }   
+
+        return raizActual;
+    }
+    
+    private Nodo encontrarMinimo(Nodo nodo) {
+        Nodo actual = nodo;
+        while (actual.getIzquierda() != null) {
+            actual = actual.getIzquierda();
         }
+        return actual;
     }
     
     public void recorridoPreOrden(Nodo r){
         Nodo actual=r,padre;
         if(actual==null)
             System.out.println("Arbol vacío");
-        
-        if(actual.getIzquierda()!=null){
-            System.out.println("["+actual.getValor()+"]");
-            recorridoPreOrden(actual.getIzquierda());
-        }
-        else
-            System.out.println("["+actual.getValor()+"]");
-        
-        if(actual.getDerecha()!=null){
-            recorridoPreOrden(actual.getDerecha());
-        }
+        else{
+            if(actual.getIzquierda()!=null){
+                System.out.println("["+actual.getValor()+"]");
+                recorridoPreOrden(actual.getIzquierda());
+            }
+            else
+                System.out.println("["+actual.getValor()+"]");
+
+            if(actual.getDerecha()!=null){
+                recorridoPreOrden(actual.getDerecha());
+            }
+        }         
+    }
+    
+    public void recorridoPostOrden(Nodo r){
+        if(r==null)
+            System.out.println("Arbol vacío");
+        else{
+            if(r.getIzquierda()!=null)
+                recorridoPostOrden(r.getIzquierda());
             
+            if(r.getDerecha()!=null)
+                recorridoPostOrden(r.getDerecha());
+            
+            System.out.println("["+r.getValor()+"]");
+        }
+    }
+    
+    public void recorridoInorden(Nodo r){
+        if(r.getIzquierda()!=null)
+            recorridoInorden(r.getIzquierda());
+        
+        System.out.println("["+r.getValor()+"]");
+        
+        if(r.getDerecha()!=null)
+            recorridoInorden(r.getDerecha());
+    }
+    
+    public Nodo getRaiz(){
+        return raiz;
     }
 }

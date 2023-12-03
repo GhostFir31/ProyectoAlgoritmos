@@ -28,4 +28,8 @@ public class Nodo {
     public void setIzquierda(Nodo izquierda){
         this.izquierda=izquierda;
     }
+
+    public void setValor(int valor) {
+        this.valor = valor;
+    }
 }
