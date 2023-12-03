@@ -31,6 +31,19 @@ public class ArbolBinarioBalanceado {
                     aux.setDerecha(n);
                     break;
                 }
+                //El nodo no posee hijos izquierda
+                //Y el valor es menor al del nodo
+                else if(n.getValor()<aux.getValor() && aux.getIzquierda()==null){
+                    aux.setIzquierda(n);
+                    break;
+                }
+                //Pasamos al siguiente nodo
+                else{
+                    if(n.getValor()>aux.getValor())
+                        aux.getDerecha();
+                    else
+                        aux.getIzquierda();
+                }
             }
         }
     }
