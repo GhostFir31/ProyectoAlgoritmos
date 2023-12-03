@@ -14,6 +14,12 @@ public class ProyectoAlgoritmos {
     }
 
     public static void main(String[] args) {
+        
+        InterfazMenu ide =new InterfazMenu();
+        ide.setVisible(true);
+        ide.setLocationRelativeTo(null); 
+        
+        
         ProyectoAlgoritmos proyecto= new ProyectoAlgoritmos();
         boolean activo=true;
         

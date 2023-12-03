@@ -6,6 +6,7 @@ package com.uabc.proyectoalgoritmos;
 
 import java.awt.Image;
 import java.io.File;
+import java.util.ArrayList;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -22,9 +23,11 @@ public class InterfazMenu extends javax.swing.JFrame {
      */
     private ImageIcon imagen;
     private Icon icono;
+    //Actualizar esta variable cada que se quiera ejecutar en un equipo nuevo
     private String rutaAssets = "C:\\Users\\omar-\\OneDrive\\Documentos\\NetBeansProjects\\ProyectoAlgoritmos\\src\\main\\java\\com\\uabc\\proyectoalgoritmos\\assets\\";
     private final Audio audio = new Audio(rutaAssets);
-    //Actualizar esta variable cada que se quiera ejecutar en un equipo nuevo
+    
+    private ArrayList<Integer> lista = new ArrayList<>();
 
     public InterfazMenu() {
         initComponents();
@@ -195,8 +198,9 @@ public class InterfazMenu extends javax.swing.JFrame {
         int valorMaximoAleatorios =Integer.parseInt( JOptionPane.showInputDialog(null, new JLabel("Ingresar el valor maximo: ")));
         int cantidadNumeros = Integer.parseInt(JOptionPane.showInputDialog(null, new JLabel("Ingresar la cantidad de numeros: ")));
         
-        int suma=valorMaximoAleatorios+cantidadNumeros;
-        System.out.println("suma "+suma);
+        lista=Metodos.generarNumeros(valorMaximoAleatorios, cantidadNumeros);
+        
+        System.out.println(""+lista);
     }//GEN-LAST:event_generarNumerosBActionPerformed
 
     private void insertaNumerosBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertaNumerosBActionPerformed
