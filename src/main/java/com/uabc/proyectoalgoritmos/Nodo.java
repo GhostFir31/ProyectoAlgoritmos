@@ -20,4 +20,12 @@ public class Nodo {
     public int getValor(){
         return valor;
     }
+    
+    public void setDerecha(Nodo derecha){
+        this.derecha=derecha;
+    }
+    
+    public void setIzquierda(Nodo izquierda){
+        this.izquierda=izquierda;
+    }
 }
