@@ -62,6 +62,16 @@ public class ArbolBinarioBalanceado {
         }
     }
     
+    public void recorridoInorden(Nodo r){
+        if(r.getIzquierda()!=null)
+            recorridoInorden(r.getIzquierda());
+        
+        System.out.println("["+r.getValor()+"]");
+        
+        if(r.getDerecha()!=null)
+            recorridoInorden(r.getDerecha());
+    }
+    
     public Nodo getRaiz(){
         return raiz;
     }

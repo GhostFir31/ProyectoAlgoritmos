@@ -27,7 +27,7 @@ public class ProyectoAlgoritmos {
         Scanner ent = new Scanner(System.in);
         int opcion, valor;
         
-            System.out.println("1... Generar ArrayList\n2... Insertar ArrayList\n3... Inserta Numero\4... \n5...PreOrden\n6... PostOrden");
+            System.out.println("1... Generar ArrayList\n2... Insertar ArrayList\n3... Inserta Numero\4... \n5...PreOrden\n6... PostOrden\n7... Inorden");
             System.out.println("Escoge opción");
             opcion = ent.nextInt();
             
@@ -54,6 +54,10 @@ public class ProyectoAlgoritmos {
                 
                 case 6:
                     postOrden();
+                break;
+                
+                case 7:
+                    inOrden();
                 break;
             }
     }
@@ -85,5 +89,9 @@ public class ProyectoAlgoritmos {
     
     public void postOrden(){
         arbol.recorridoPostOrden(arbol.getRaiz());
+    }
+    
+    public void inOrden(){
+        arbol.recorridoInorden(arbol.getRaiz());
     }
 }
