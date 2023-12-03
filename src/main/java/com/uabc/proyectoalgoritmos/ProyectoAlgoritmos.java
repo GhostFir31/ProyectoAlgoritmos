@@ -27,7 +27,7 @@ public class ProyectoAlgoritmos {
         Scanner ent = new Scanner(System.in);
         int opcion, valor;
         
-            System.out.println("1... Generar ArrayList\n2... Insertar ArrayList\n3... Inserta Numero\n4... Eliminar Dato \n5...PreOrden\n6... PostOrden\n7... Inorden");
+            System.out.println("1... Generar ArrayList\n2... Insertar ArrayList\n3... Inserta Numero\n4... Eliminar Dato \n5...PreOrden\n6... PostOrden\n7... Inorden\n10... Código");
             System.out.println("Escoge opción");
             opcion = ent.nextInt();
             
@@ -65,9 +65,15 @@ public class ProyectoAlgoritmos {
                 case 7:
                     inOrden();
                 break;
+                
+                case 10:
+                    System.out.println("Escribe el valor a codigicar: ");
+                    valor=entrada.nextInt();
+                    System.out.println(arbol.obtenerCodigo(arbol.getRaiz(), valor));
+                break;
             }
     }
-    
+        
     public void agregarDatosArrayList(){
         int n = arreglo.size();
         

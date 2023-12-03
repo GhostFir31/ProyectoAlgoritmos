@@ -111,4 +111,21 @@ public class ArbolBinarioBalanceado {
     public Nodo getRaiz(){
         return raiz;
     }
+    
+    public String obtenerCodigo(Nodo r,int valor){
+        System.out.println("valor");
+        if(r!=null){
+            if(valor!=r.getValor()){
+                if(valor>r.getValor())
+                    return (obtenerCodigo(r.getDerecha(),valor)+"1");
+                else
+                    return (obtenerCodigo(r.getDerecha(),valor)+"0");
+            }
+            else
+                return "";
+        }
+        else
+            return "";
+        
+    }
 }
