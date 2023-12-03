@@ -5,52 +5,65 @@ import java.util.Scanner;
 
 public class ProyectoAlgoritmos {
     private ArbolBinarioBalanceado arbol;
+    private Metodos metodo = new Metodos();
     private Scanner entrada = new Scanner(System.in);
+    private ArrayList<Integer> arreglo = new ArrayList<>();
     
     public ProyectoAlgoritmos(){
         arbol = new ArbolBinarioBalanceado();
     }
 
     public static void main(String[] args) {
-        Scanner ent = new Scanner(System.in);
-        int opcion;
         ProyectoAlgoritmos proyecto= new ProyectoAlgoritmos();
-        Metodos metodo = new Metodos();
-        ArrayList<Integer> vector = metodo.generarNumeros(10, 5);
         boolean activo=true;
-
-        /*System.out.println("Números generados:");
-        for(int i = 0; i < vector.size(); i++){
-            System.out.println(vector.get(i));
-        }*/
         
         while(activo == true){
-            System.out.println("1... Agregar\n2... Eliminar\n3... PreOrden");
+            proyecto.mostrarMenu();
+        }
+        
+    }
+    
+    public void mostrarMenu(){
+        Scanner ent = new Scanner(System.in);
+        int opcion, valor;
+        
+            System.out.println("1... Generar ArrayList\n2... Insertar ArrayList\n3... Inserta Numero\4... \n5...PreOrden");
             System.out.println("Escoge opción");
             opcion = ent.nextInt();
             
             switch(opcion){
                 case 1:
-                    proyecto.agregarDato();
+                    System.out.println("Escribe el tam del arraylist");
+                    arreglo = metodo.generarNumeros(ent.nextInt(), ent.nextInt());
+                    System.out.println(arreglo);
                 break;
                 
                 case 2:
-                    proyecto.eliminarDato();
+                    agregarDatosArrayList();
                 break;
                 
                 case 3:
-                    proyecto.preOrden();
+                    System.out.println("Escribe valor");
+                    valor=entrada.nextInt();
+                    agregarDato(valor);
+                break;
+                
+                case 5:
+                    preOrden();
                 break;
             }
-        }
-        
     }
     
-    public void agregarDato(){
-        int valor;
-        System.out.println("Escribe valor");
-        valor=entrada.nextInt();
+    public void agregarDatosArrayList(){
+        int n = arreglo.size();
         
+        if(n!=0)
+            for(int i =0;i<n;i++)
+                agregarDato(arreglo.get(i));
+    }
+    
+    public void agregarDato(int valor){
+      
         arbol.insertaNodo(valor,arbol.getRaiz());
     }
     
