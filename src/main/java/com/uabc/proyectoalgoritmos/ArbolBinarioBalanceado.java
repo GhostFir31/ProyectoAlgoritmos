@@ -1,4 +1,6 @@
 package com.uabc.proyectoalgoritmos;
+import java.util.LinkedList;
+import java.util.Queue;
 
 public class ArbolBinarioBalanceado {
     Nodo raiz;
@@ -110,5 +112,29 @@ public class ArbolBinarioBalanceado {
     
     public Nodo getRaiz(){
         return raiz;
+    }
+    
+    public void recorridoPorNiveles(Nodo raiz) {
+        if (raiz == null) {
+            System.out.println("El árbol está vacío.");
+            return;
+        }
+
+        Queue<Nodo> cola = new LinkedList<>();
+        cola.add(raiz);
+
+        while (!cola.isEmpty()) {
+            Nodo nodoActual = cola.poll();
+            System.out.print(nodoActual.getValor() + " ");
+
+            if (nodoActual.getIzquierda() != null) {
+                cola.add(nodoActual.getIzquierda());
+            }
+
+            if (nodoActual.getDerecha() != null) {
+                cola.add(nodoActual.getDerecha());
+            }
+        }
+        System.out.println();  // Agregar una nueva línea al final
     }
 }

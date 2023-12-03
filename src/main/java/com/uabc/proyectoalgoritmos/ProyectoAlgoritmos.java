@@ -65,6 +65,9 @@ public class ProyectoAlgoritmos {
                 case 7:
                     inOrden();
                 break;
+                case 8:
+                    arbol.recorridoPorNiveles(arbol.raiz);
+                break;
             }
     }
     
