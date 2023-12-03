@@ -3,7 +3,7 @@
  */
 
 package com.uabc.proyectoalgoritmos;
-
+import java.util.ArrayList;
 /**
  *
  * @author JesusOmar Leal
@@ -11,6 +11,12 @@ package com.uabc.proyectoalgoritmos;
 public class ProyectoAlgoritmos {
 
     public static void main(String[] args) {
-        System.out.println("Hola muy buenas a to2 wapisimos aki alan777 en un nuevo proyecto de github");
+        Metodos metodo = new Metodos();
+        ArrayList<Integer> vector = metodo.generarNumeros(10, 5);
+
+        System.out.println("Números generados:");
+        for(int i = 0; i < vector.size(); i++){
+            System.out.println(vector.get(i));
+        }
     }
 }
