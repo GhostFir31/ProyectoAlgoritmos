@@ -13,7 +13,7 @@ public class ProyectoAlgoritmos {
         ArbolBinarioBalanceado arbolBinario = new ArbolBinarioBalanceado();
         
         // Insertar 10 nodos en el árbol
-        for(int i = 0; i < 2; i++){
+        for(int i = 0; i < 3; i++){
             arbolBinario.insertaNodo(i);
         }
         
