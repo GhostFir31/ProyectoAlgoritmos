@@ -4,14 +4,15 @@
  */
 package com.uabc.proyectoalgoritmos;
 
+import java.awt.BorderLayout;
 import java.awt.Image;
-import java.io.File;
 import java.util.ArrayList;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-
+import javax.swing.*;
+import javax.swing.tree.DefaultMutableTreeNode;
 /**
  *
  * @author JesusOmar Leal
@@ -26,16 +27,19 @@ public class InterfazMenu extends javax.swing.JFrame {
     //Actualizar esta variable cada que se quiera ejecutar en un equipo nuevo
     private String rutaAssets = "C:\\Users\\omar-\\OneDrive\\Documentos\\NetBeansProjects\\ProyectoAlgoritmos\\src\\main\\java\\com\\uabc\\proyectoalgoritmos\\assets\\";
     private final Audio audio = new Audio(rutaAssets);
-    
+    //*****************************************************************
+    //Variables Funcionamiento*****************************************
     private ArrayList<Integer> lista = new ArrayList<>();
+    private ArbolBinarioBalanceado arbol = new ArbolBinarioBalanceado();
 
     public InterfazMenu() {
+        
         initComponents();
 
-        //Agregar la ruta en assets
         this.setImagen(titulo, rutaAssets + "titulo2.png");
         this.setImagen(Background, rutaAssets + "background.jpg");
-        audio.playAudio();
+        // audio.playAudio();
+
     }
 
     private void setImagen(JLabel lbl, String url) {
@@ -68,10 +72,11 @@ public class InterfazMenu extends javax.swing.JFrame {
         recorrerPorNivelB = new javax.swing.JButton();
         encontrarNodosNivelB = new javax.swing.JButton();
         obtenerCodigoB = new javax.swing.JButton();
-        Canva = new javax.swing.JPanel();
+        Canvas = new javax.swing.JPanel();
         Background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -158,94 +163,217 @@ public class InterfazMenu extends javax.swing.JFrame {
         });
         jPanel1.add(obtenerCodigoB, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 460, 160, -1));
 
-        Canva.setBackground(new java.awt.Color(255, 255, 255));
+        Canvas.setBackground(new java.awt.Color(255, 255, 255));
 
-        javax.swing.GroupLayout CanvaLayout = new javax.swing.GroupLayout(Canva);
-        Canva.setLayout(CanvaLayout);
-        CanvaLayout.setHorizontalGroup(
-            CanvaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout CanvasLayout = new javax.swing.GroupLayout(Canvas);
+        Canvas.setLayout(CanvasLayout);
+        CanvasLayout.setHorizontalGroup(
+            CanvasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 470, Short.MAX_VALUE)
         );
-        CanvaLayout.setVerticalGroup(
-            CanvaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        CanvasLayout.setVerticalGroup(
+            CanvasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 380, Short.MAX_VALUE)
         );
 
-        jPanel1.add(Canva, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 100, 470, 380));
+        jPanel1.add(Canvas, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 100, 470, 380));
         jPanel1.add(Background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 690, 500));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void obtenerCodigoBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_obtenerCodigoBActionPerformed
+        try {
+            String numeroStr = JOptionPane.showInputDialog(null, new JLabel("Ingresar el numero que desea ver su codigo : "));
+            if (numeroStr == null) {
+
+                return;
+            }
+            int numero = Integer.parseInt(numeroStr);
+
+            System.out.println("numero a buscar codigo: " + numero);
+
+        } catch (NumberFormatException e) {
+
+            JOptionPane.showMessageDialog(null, "Error: Ingrese valores numéricos válidos");
+        }
+    }//GEN-LAST:event_obtenerCodigoBActionPerformed
+
+    private void encontrarNodosNivelBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_encontrarNodosNivelBActionPerformed
+        try {
+            String nivelStr = JOptionPane.showInputDialog(null, new JLabel("Ingresar el nivel del arbol que desea ver : "));
+            if (nivelStr == null) {
+
+                return;
+            }
+            int nivel = Integer.parseInt(nivelStr);
+
+            System.out.println("nivel seleccionado: " + nivel);
+
+        } catch (NumberFormatException e) {
+
+            JOptionPane.showMessageDialog(null, "Error: Ingrese valores numéricos válidos");
+        }
+    }//GEN-LAST:event_encontrarNodosNivelBActionPerformed
+
+    private void recorrerPorNivelBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_recorrerPorNivelBActionPerformed
+        if (arbol.getRaiz() != null) {
+
+        } else {
+            JOptionPane.showMessageDialog(null, "No se a creado el arbol");
+
+        }
+    }//GEN-LAST:event_recorrerPorNivelBActionPerformed
+
+    private void recorrerInOrdenBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_recorrerInOrdenBActionPerformed
+        if (arbol.getRaiz() != null) {
+            System.out.println("Inorden:");
+            inOrden();
+        } else {
+            JOptionPane.showMessageDialog(null, "No se a creado el arbol");
+
+        }
+    }//GEN-LAST:event_recorrerInOrdenBActionPerformed
+
+    private void recorrerPostOrdenBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_recorrerPostOrdenBActionPerformed
+
+        if (arbol.getRaiz() != null) {
+            System.out.println("Postorden:");
+            postOrden();
+        } else {
+            JOptionPane.showMessageDialog(null, "No se a creado el arbol");
+
+        }
+    }//GEN-LAST:event_recorrerPostOrdenBActionPerformed
+
+    private void recorrerPreOrdenBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_recorrerPreOrdenBActionPerformed
+        if (arbol.getRaiz() != null) {
+            System.out.println("Preorden:");
+            preOrden();
+        } else {
+            JOptionPane.showMessageDialog(null, "No se a creado el arbol");
+
+        }
+    }//GEN-LAST:event_recorrerPreOrdenBActionPerformed
+
+    private void eliminarUnNumeroBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarUnNumeroBActionPerformed
+        try {
+            String valorEliminarStr = JOptionPane.showInputDialog(null, new JLabel("Ingresar el valor que deseas eliminar: "));
+
+            if (valorEliminarStr == null) {
+
+                return;
+            }
+
+            int valorEliminar = Integer.parseInt(valorEliminarStr);
+
+            arbol.eliminarRecursivo(arbol.raiz, valorEliminar);
+
+            System.out.println("Valor eliminado: " + valorEliminar);
+            arbol.mostrarArbol(arbol);
+        } catch (NumberFormatException e) {
+
+            JOptionPane.showMessageDialog(null, "Error: Ingrese valores numéricos válidos");
+        }
+    }//GEN-LAST:event_eliminarUnNumeroBActionPerformed
+
+    private void insertarUnNumeroBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertarUnNumeroBActionPerformed
+        try {
+            String valorInsertadoStr = JOptionPane.showInputDialog(null, new JLabel("Ingresar el valor que deseas insertar: "));
+
+            if (valorInsertadoStr == null) {
+
+                return;
+            }
+
+            int valorInsertado = Integer.parseInt(valorInsertadoStr);
+
+            agregarDato(valorInsertado);
+
+            System.out.println("Valor Agregado: " + valorInsertado);
+            arbol.mostrarArbol(arbol);
+        } catch (NumberFormatException e) {
+
+            JOptionPane.showMessageDialog(null, "Error: Ingrese valores numéricos válidos");
+        }
+    }//GEN-LAST:event_insertarUnNumeroBActionPerformed
+
+    private void insertaNumerosBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertaNumerosBActionPerformed
+        if (arbol.getRaiz() != null) {
+            agregarDatosArrayList();
+            arbol.mostrarArbol(arbol);
+
+        } else {
+            JOptionPane.showMessageDialog(null, "No se a creado el arbol");
+
+        }
+
+    }//GEN-LAST:event_insertaNumerosBActionPerformed
+
+    private void generarNumerosBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generarNumerosBActionPerformed
+        try {
+            String valorMaximoStr = JOptionPane.showInputDialog(null, new JLabel("Ingresar el valor máximo: "));
+
+            if (valorMaximoStr == null) {
+
+                return;
+            }
+
+            int valorMaximoAleatorios = Integer.parseInt(valorMaximoStr);
+
+            String cantidadNumerosStr = JOptionPane.showInputDialog(null, new JLabel("Ingresar la cantidad de números: "));
+
+            if (cantidadNumerosStr == null) {
+
+                return;
+            }
+
+            int cantidadNumeros = Integer.parseInt(cantidadNumerosStr);
+
+            lista = Metodos.generarNumeros(valorMaximoAleatorios, cantidadNumeros);
+
+            System.out.println("" + lista);
+
+        } catch (NumberFormatException e) {
+
+            JOptionPane.showMessageDialog(null, "Error: Ingrese valores numéricos válidos");
+
+        }
+    }//GEN-LAST:event_generarNumerosBActionPerformed
 
     private Icon icono(String ruta, int width, int height) {
         Icon img = new ImageIcon(new ImageIcon(getClass().getResource(ruta)).getImage().getScaledInstance(width, height, java.awt.Image.SCALE_SMOOTH));
         return img;
     }
 
+    public void agregarDatosArrayList() {
+        int n = lista.size();
 
-    private void generarNumerosBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generarNumerosBActionPerformed
-        int valorMaximoAleatorios =Integer.parseInt( JOptionPane.showInputDialog(null, new JLabel("Ingresar el valor maximo: ")));
-        int cantidadNumeros = Integer.parseInt(JOptionPane.showInputDialog(null, new JLabel("Ingresar la cantidad de numeros: ")));
-        
-        lista=Metodos.generarNumeros(valorMaximoAleatorios, cantidadNumeros);
-        
-        System.out.println(""+lista);
-    }//GEN-LAST:event_generarNumerosBActionPerformed
+        if (n != 0) {
+            for (int i = 0; i < n; i++) {
+                agregarDato(lista.get(i));
+            }
+        }
+    }
 
-    private void insertaNumerosBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertaNumerosBActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_insertaNumerosBActionPerformed
+    public void agregarDato(int valor) {
 
-    private void insertarUnNumeroBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertarUnNumeroBActionPerformed
-        int valorInsertado =Integer.parseInt( JOptionPane.showInputDialog(null, new JLabel("Ingresar el valor que deseas insertar: ")));
-        
-        System.out.println("Valor Insertado: "+valorInsertado);
-    }//GEN-LAST:event_insertarUnNumeroBActionPerformed
+        arbol.insertaNodo(valor, arbol.getRaiz());
+    }
 
-    private void eliminarUnNumeroBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarUnNumeroBActionPerformed
-       int valorEliminar =Integer.parseInt( JOptionPane.showInputDialog(null, new JLabel("Ingresar el valor que deseas eliminar: ")));
-        
-        System.out.println("Valor eliminado: "+valorEliminar);
-    }//GEN-LAST:event_eliminarUnNumeroBActionPerformed
+    public void preOrden() {
+        arbol.recorridoPreOrden(arbol.getRaiz());
+    }
 
-    private void recorrerPreOrdenBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_recorrerPreOrdenBActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_recorrerPreOrdenBActionPerformed
+    public void postOrden() {
+        arbol.recorridoPostOrden(arbol.getRaiz());
+    }
 
-    private void recorrerPostOrdenBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_recorrerPostOrdenBActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_recorrerPostOrdenBActionPerformed
-
-    private void recorrerInOrdenBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_recorrerInOrdenBActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_recorrerInOrdenBActionPerformed
-
-    private void recorrerPorNivelBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_recorrerPorNivelBActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_recorrerPorNivelBActionPerformed
-
-    private void encontrarNodosNivelBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_encontrarNodosNivelBActionPerformed
-       int nivel =Integer.parseInt( JOptionPane.showInputDialog(null, new JLabel("Ingresar el nivel del arbol que desea ver : ")));
-        
-        System.out.println("nivel seleccionado: "+nivel);
-    }//GEN-LAST:event_encontrarNodosNivelBActionPerformed
-
-    private void obtenerCodigoBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_obtenerCodigoBActionPerformed
-        int numero =Integer.parseInt( JOptionPane.showInputDialog(null, new JLabel("Ingresar el numero que desea ver su codigo : ")));
-        
-        System.out.println("numero a buscar codigo: "+numero);
-    }//GEN-LAST:event_obtenerCodigoBActionPerformed
+    public void inOrden() {
+        arbol.recorridoInorden(arbol.getRaiz());
+    }
 
     /**
      * @param args the command line arguments
@@ -281,10 +409,16 @@ public class InterfazMenu extends javax.swing.JFrame {
             }
         });
     }
-
+    //Parte Canvas
+    
+    
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Background;
     private javax.swing.JPanel Canva;
+    private javax.swing.JPanel Canva1;
+    private javax.swing.JPanel Canvas;
     private javax.swing.JButton eliminarUnNumeroB;
     private javax.swing.JButton encontrarNodosNivelB;
     private javax.swing.JButton generarNumerosB;
