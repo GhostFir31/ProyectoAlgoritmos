@@ -25,7 +25,7 @@ public class InterfazMenu extends javax.swing.JFrame {
     private ImageIcon imagen;
     private Icon icono;
     //Actualizar esta variable cada que se quiera ejecutar en un equipo nuevo
-    private String rutaAssets = "C:\\Users\\omar-\\OneDrive\\Documentos\\NetBeansProjects\\ProyectoAlgoritmos\\src\\main\\java\\com\\uabc\\proyectoalgoritmos\\assets\\";
+    private String rutaAssets = "C:\\Users\\alan1\\Documents\\GitHub\\ProyectoAlgoritmos\\src\\main\\java\\com\\uabc\\proyectoalgoritmos\\assets\\";
     private final Audio audio = new Audio(rutaAssets);
     //*****************************************************************
     //Variables Funcionamiento*****************************************
@@ -38,7 +38,7 @@ public class InterfazMenu extends javax.swing.JFrame {
 
         this.setImagen(titulo, rutaAssets + "titulo2.png");
         this.setImagen(Background, rutaAssets + "background.jpg");
-        //audio.playAudio();
+        audio.playAudio();
 
     }
 
@@ -77,9 +77,7 @@ public class InterfazMenu extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        titulo.setIcon(new javax.swing.ImageIcon("C:\\Users\\omar-\\OneDrive\\Documentos\\NetBeansProjects\\ProyectoAlgoritmos\\src\\main\\java\\com\\uabc\\proyectoalgoritmos\\assets\\titulo2.png")); // NOI18N
-        getContentPane().add(titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 10, 590, -1));
+        getContentPane().add(titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 10, 590, 70));
 
         generarNumerosB.setText("Generar Numeros");
         generarNumerosB.addActionListener(new java.awt.event.ActionListener() {
@@ -162,7 +160,6 @@ public class InterfazMenu extends javax.swing.JFrame {
         getContentPane().add(obtenerCodigoB, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 460, 160, -1));
 
         Canvas.setBackground(new java.awt.Color(255, 255, 255));
-        Canvas.setForeground(new java.awt.Color(0, 0, 0));
         Canvas.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         Canvas.add(ResultadoTEXT, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 350, 720, 20));
 
@@ -358,7 +355,7 @@ public class InterfazMenu extends javax.swing.JFrame {
             int baseXOffset = 60; 
             int baseYOffset = 35;
             int xOffset = 0;
-            int yOffset = 0 ;
+            int yOffset = 0;
             if (nivel > 1) {
                 xOffset = baseXOffset - (nivel * 15); 
                 yOffset = baseYOffset + (nivel * 10);
@@ -375,11 +372,11 @@ public class InterfazMenu extends javax.swing.JFrame {
             pintarNodo(nodo.getDerecha(), g, rightX, rightY, nivel + 1);
 
             if (nodo.getIzquierda() != null) {
-                drawArrow(g, x, y, leftX, leftY, 50);
+                pintarFlecha(g, x, y, leftX, leftY, 50);
             }
 
             if (nodo.getDerecha() != null) {
-                drawArrow(g, x, y, rightX, rightY, 50);
+                pintarFlecha(g, x, y, rightX, rightY, 50);
             }
 
             g.setColor(Color.BLUE);
@@ -394,7 +391,6 @@ public class InterfazMenu extends javax.swing.JFrame {
         }
     }
 
-// Llamada inicial desde pintarArbol
     private void pintarArbol(ArbolBinarioBalanceado arbol) {
         limpiarCanvas();
         Graphics g = Canvas.getGraphics();
@@ -406,7 +402,7 @@ public class InterfazMenu extends javax.swing.JFrame {
         pintarNodo(arbol.getRaiz(), g, startX, startY, 1);
     }
 
-    private void drawArrow(Graphics g, int x1, int y1, int x2, int y2, int lineLength) {
+    private void pintarFlecha(Graphics g, int x1, int y1, int x2, int y2, int lineLength) {
         int arrowSize = 5;
 
         double angle = Math.atan2(y2 - y1, x2 - x1);

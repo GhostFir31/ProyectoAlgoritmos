@@ -9,14 +9,10 @@ public class ArbolBinarioBalanceado {
     Nodo raiz;
 
     public ArbolBinarioBalanceado() {
-
         this.raiz = null;
-
     }
 
     public void insertaNodo(int valor, Nodo actual) {
-        Nodo agregado;
-
         if (actual == null) {
             raiz = new Nodo(valor);
         } else {
@@ -73,7 +69,7 @@ public class ArbolBinarioBalanceado {
     }
 
     public String recorridoPreOrden(Nodo r) {
-        Nodo actual = r, padre;
+        Nodo actual = r;
         String text = "";
         if (actual == null) {
             text = "Arbol vacío";
@@ -146,14 +142,14 @@ public class ArbolBinarioBalanceado {
                 {
                     if (r.getIzquierda() != null)//si el hijo de la izq es dif a null
                     {
-                        return "0" + obtenerCodigo(r.getIzquierda(), valor);
+                        return "1" + obtenerCodigo(r.getIzquierda(), valor);
                     } else {
                         return "[No existe el número en el arbol]";
                     }
                 } else {
                     if (valor > r.getValor()) {
                         if (r.getDerecha() != null) {
-                            return "1" + obtenerCodigo(r.getDerecha(), valor);
+                            return "0" + obtenerCodigo(r.getDerecha(), valor);
                         } else {
                             return "[No existe el número en el arbol]";
                         }

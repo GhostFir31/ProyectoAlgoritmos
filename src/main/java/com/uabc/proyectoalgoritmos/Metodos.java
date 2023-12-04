@@ -23,7 +23,4 @@ public class Metodos {
         }
         return vector;
     }
-    
-
-    
 }
