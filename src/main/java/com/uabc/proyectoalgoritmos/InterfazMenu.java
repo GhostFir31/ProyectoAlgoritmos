@@ -355,13 +355,17 @@ public class InterfazMenu extends javax.swing.JFrame {
 
     private void pintarNodo(Nodo nodo, Graphics g, int x, int y, int nivel) {
         if (nodo != null) {
-            int baseXOffset = 80; // Separación base entre nodos
-            int baseYOffset = 0;
-
-            // Ajusta la separación horizontal en función del nivel
-            int xOffset = baseXOffset - nivel * 10; // Puedes ajustar este valor según tus preferencias
-            int yOffset = baseYOffset + nivel * 10; 
-            
+            int baseXOffset = 60; 
+            int baseYOffset = 35;
+            int xOffset = 0;
+            int yOffset = 0 ;
+            if (nivel > 1) {
+                xOffset = baseXOffset - (nivel * 15); 
+                yOffset = baseYOffset + (nivel * 10);
+            } else {
+                xOffset = baseXOffset; 
+                yOffset = baseYOffset;
+            }
             int leftX = x - xOffset;
             int leftY = y + yOffset;
             pintarNodo(nodo.getIzquierda(), g, leftX, leftY, nivel + 1);
