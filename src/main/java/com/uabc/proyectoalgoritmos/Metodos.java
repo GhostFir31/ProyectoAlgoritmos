@@ -12,7 +12,7 @@ import java.util.ArrayList;
  * @author alan1
  */
 public class Metodos {
-
+//lo modifique
     public static ArrayList generarNumeros(int k, int n) {
         ArrayList<Integer> vector = new ArrayList<>();
         Random random = new Random();

@@ -1,10 +1,18 @@
 package com.uabc.proyectoalgoritmos;
 
+import java.util.LinkedList;
+import java.util.Queue;
+
 public class ArbolBinarioBalanceado {
     Nodo raiz;
     
     public ArbolBinarioBalanceado(){
+        
+        
+        
         this.raiz=null;
+        
+        
     }
     
     public void insertaNodo(int valor,Nodo actual){
@@ -111,4 +119,31 @@ public class ArbolBinarioBalanceado {
     public Nodo getRaiz(){
         return raiz;
     }
+    
+    // omar
+    public void mostrarArbol(ArbolBinarioBalanceado arbol) {
+        if (arbol.getRaiz() == null) {
+            System.out.println("Arbol vacío");
+            return;
+        }
+
+        Queue<Nodo> cola = new LinkedList<>();
+        cola.add(arbol.getRaiz());
+
+        while (!cola.isEmpty()) {
+            Nodo actual = cola.poll();
+            System.out.print("[" + actual.getValor() + "] ");
+
+            if (actual.getIzquierda() != null) {
+                cola.add(actual.getIzquierda());
+            }
+
+            if (actual.getDerecha() != null) {
+                cola.add(actual.getDerecha());
+            }
+        }
+
+        System.out.println();
+    }
+    
 }
