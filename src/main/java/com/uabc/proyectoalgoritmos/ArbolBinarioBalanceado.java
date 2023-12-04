@@ -1,5 +1,7 @@
 package com.uabc.proyectoalgoritmos;
 
+import java.util.ArrayList;
+
 public class ArbolBinarioBalanceado {
     Nodo raiz;
     
@@ -113,19 +115,63 @@ public class ArbolBinarioBalanceado {
     }
     
     public String obtenerCodigo(Nodo r,int valor){
-        System.out.println("valor");
-        if(r!=null){
-            if(valor!=r.getValor()){
-                if(valor>r.getValor())
-                    return (obtenerCodigo(r.getDerecha(),valor)+"1");
-                else
-                    return (obtenerCodigo(r.getDerecha(),valor)+"0");
-            }
-            else
-                return "";
-        }
-        else
-            return "";
         
+        if(r==null)
+            return "vacio";
+        else{
+            if(valor==r.getValor())
+                return "";
+            else{
+                if(valor<r.getValor())//Si el valor dado es menor que el valor del nodo actual
+                    if(r.getIzquierda()!=null)//si el hijo de la izq es dif a null
+                        return "0"+obtenerCodigo(r.getIzquierda(),valor);
+                    else
+                        return "[No existe el número en el arbol]";
+                else{
+                    if(valor>r.getValor())
+                        if(r.getDerecha()!=null)
+                            return "1"+obtenerCodigo(r.getDerecha(),valor);
+                        else
+                            return "[No existe el número en el arbol]";
+                    else
+                        return "Es igual";
+                }
+            }
+        }
+    }
+    
+    public Nodo Balancea(Nodo r){
+        if(r==null){
+            return null;
+        }
+        
+        //Obtener lista de nodos en orden
+        ArrayList<Nodo> nodos = new ArrayList<>();
+        enOrden(r,nodos);
+        
+        //construir un árbol balanceado en base a una lista ordenada
+        return creaBalanceado(nodos,0,nodos.size()-1);
+    }
+    
+    public void enOrden(Nodo r,ArrayList<Nodo> nodos){
+        if(r==null)
+            return;
+        
+        enOrden(r.getIzquierda(),nodos);
+        nodos.add(r);
+        enOrden(r.getDerecha(),nodos);
+    }
+    
+    public Nodo creaBalanceado(ArrayList<Nodo> nodos, int inicio, int fin){
+        if(inicio>fin)
+            return null;
+        
+        int mid = (inicio+fin)/2;
+        Nodo actual = nodos.get(mid);
+        
+        actual.setIzquierda(creaBalanceado(nodos,inicio,mid-1));
+        actual.setDerecha(creaBalanceado(nodos,mid+1,fin));
+        
+        return actual;
     }
 }

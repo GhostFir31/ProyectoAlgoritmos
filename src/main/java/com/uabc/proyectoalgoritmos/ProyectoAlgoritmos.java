@@ -26,6 +26,7 @@ public class ProyectoAlgoritmos {
     public void mostrarMenu(){
         Scanner ent = new Scanner(System.in);
         int opcion, valor;
+        StringBuilder codigoInvertido;
         
             System.out.println("1... Generar ArrayList\n2... Insertar ArrayList\n3... Inserta Numero\n4... Eliminar Dato \n5...PreOrden\n6... PostOrden\n7... Inorden\n10... Código");
             System.out.println("Escoge opción");
@@ -51,7 +52,7 @@ public class ProyectoAlgoritmos {
                 case 4:
                     System.out.println("Escribe el valor a eliminar: ");
                     valor=entrada.nextInt();
-                    arbol.eliminarRecursivo(arbol.raiz,valor);
+                    arbol.eliminarRecursivo(arbol.getRaiz(),valor);
                 break;
                 
                 case 5:
@@ -69,7 +70,10 @@ public class ProyectoAlgoritmos {
                 case 10:
                     System.out.println("Escribe el valor a codigicar: ");
                     valor=entrada.nextInt();
-                    System.out.println(arbol.obtenerCodigo(arbol.getRaiz(), valor));
+                    codigoInvertido = new StringBuilder(arbol.obtenerCodigo(arbol.getRaiz(), valor));
+                    System.out.println("Codigo: "+codigoInvertido);
+                    codigoInvertido.reverse();
+                    System.out.println("Codigo Invertido: "+codigoInvertido);
                 break;
             }
     }
@@ -80,6 +84,8 @@ public class ProyectoAlgoritmos {
         if(n!=0)
             for(int i =0;i<n;i++)
                 agregarDato(arreglo.get(i));
+        
+        BalanceaArbol();
     }
     
     public void agregarDato(int valor){
@@ -105,5 +111,9 @@ public class ProyectoAlgoritmos {
     
     public void inOrden(){
         arbol.recorridoInorden(arbol.getRaiz());
+    }
+    
+    public void BalanceaArbol(){
+        arbol.Balancea(arbol.getRaiz());
     }
 }
