@@ -72,6 +72,7 @@ public class InterfazMenu extends javax.swing.JFrame {
         encontrarNodosNivelB = new javax.swing.JButton();
         obtenerCodigoB = new javax.swing.JButton();
         Canvas = new javax.swing.JPanel();
+        ResultadoTEXT = new javax.swing.JLabel();
         Background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -162,17 +163,8 @@ public class InterfazMenu extends javax.swing.JFrame {
 
         Canvas.setBackground(new java.awt.Color(255, 255, 255));
         Canvas.setForeground(new java.awt.Color(0, 0, 0));
-
-        javax.swing.GroupLayout CanvasLayout = new javax.swing.GroupLayout(Canvas);
-        Canvas.setLayout(CanvasLayout);
-        CanvasLayout.setHorizontalGroup(
-            CanvasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 740, Short.MAX_VALUE)
-        );
-        CanvasLayout.setVerticalGroup(
-            CanvasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 380, Short.MAX_VALUE)
-        );
+        Canvas.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        Canvas.add(ResultadoTEXT, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 350, 720, 20));
 
         getContentPane().add(Canvas, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 100, 740, 380));
         getContentPane().add(Background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 960, 500));
@@ -230,7 +222,7 @@ public class InterfazMenu extends javax.swing.JFrame {
 
         if (arbol.getRaiz() != null) {
             System.out.println("Inorden:");
-            inOrden();
+            ResultadoTEXT.setText("InOrden= "+arbol.recorridoInorden(arbol.getRaiz()));
             pintarArbol(arbol);
         } else {
             JOptionPane.showMessageDialog(null, "No se ha creado el arbol");
@@ -242,7 +234,7 @@ public class InterfazMenu extends javax.swing.JFrame {
 
         if (arbol.getRaiz() != null) {
             System.out.println("Postorden:");
-            postOrden();
+            ResultadoTEXT.setText("PostOrden= "+arbol.recorridoPostOrden(arbol.getRaiz()));
             pintarArbol(arbol);
         } else {
             JOptionPane.showMessageDialog(null, "No se ha creado el arbol");
@@ -254,7 +246,7 @@ public class InterfazMenu extends javax.swing.JFrame {
 
         if (arbol.getRaiz() != null) {
             System.out.println("Preorden:");
-            preOrden();
+            ResultadoTEXT.setText("PreOrden= "+arbol.recorridoPreOrden(arbol.getRaiz()));
             pintarArbol(arbol);
         } else {
             JOptionPane.showMessageDialog(null, "No se ha creado el arbol");
@@ -279,7 +271,7 @@ public class InterfazMenu extends javax.swing.JFrame {
             System.out.println("Valor eliminado: " + valorEliminar);
             arbol.setRaiz(arbol.Balancea(arbol.getRaiz()));
             arbol.mostrarArbol(arbol);
-            
+
             pintarArbol(arbol);
 
         } catch (NumberFormatException e) {
@@ -328,8 +320,8 @@ public class InterfazMenu extends javax.swing.JFrame {
 
     private void generarNumerosBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generarNumerosBActionPerformed
         limpiarCanvas();
-        lista=new ArrayList();
-        arbol=new ArbolBinarioBalanceado();
+        lista = new ArrayList();
+        arbol = new ArbolBinarioBalanceado();
         try {
             String valorMaximoStr = JOptionPane.showInputDialog(null, new JLabel("Ingresar el valor máximo: "));
 
@@ -359,53 +351,50 @@ public class InterfazMenu extends javax.swing.JFrame {
 
         }
     }//GEN-LAST:event_generarNumerosBActionPerformed
-    private void pintarArbol(ArbolBinarioBalanceado arbol) {
-        limpiarCanvas();
-        Graphics g = Canvas.getGraphics();
+private void pintarNodo(Nodo nodo, Graphics g, int x, int y, int nivel) {
+    if (nodo != null) {
+        int xOffset = 60;
+        int yOffset = 50;
+
+        int leftX = x - xOffset;
+        int leftY = y + yOffset;
+        pintarNodo(nodo.getIzquierda(), g, leftX, leftY, nivel + 1);
+
+        int rightX = x + xOffset;
+        int rightY = y + yOffset;
+        pintarNodo(nodo.getDerecha(), g, rightX, rightY, nivel + 1);
+
+        if (nodo.getIzquierda() != null) {
+            drawArrow(g, x, y, leftX, leftY, 50);
+        }
+
+        if (nodo.getDerecha() != null) {
+            drawArrow(g, x, y, rightX, rightY, 50);
+        }
+
+        g.setColor(Color.BLUE);
+
+        int radius = 15;
+
+        g.fillOval(x - radius, y - radius, 2 * radius, 2 * radius);
+
         g.setColor(Color.BLACK);
 
-        int startX = Canvas.getWidth() / 2;
-        int startY = 50;
-
-        pintarNodo(arbol.getRaiz(), g, startX, startY);
+        g.drawString(String.valueOf(nodo.getValor()), x - 5, y + 5);
     }
+}
 
-    private void pintarNodo(Nodo nodo, Graphics g, int x, int y) {
-        if (nodo != null) {
+// Llamada inicial desde pintarArbol
+private void pintarArbol(ArbolBinarioBalanceado arbol) {
+    limpiarCanvas();
+    Graphics g = Canvas.getGraphics();
+    g.setColor(Color.BLACK);
 
-            int xOffset = 60;
-            int yOffset = 30;
+    int startX = Canvas.getWidth() / 2;
+    int startY = 50;
 
-            int leftX = x - xOffset;
-            int leftY = y + yOffset;
-            pintarNodo(nodo.getIzquierda(), g, leftX, leftY);
-
-            int rightX = x + xOffset;
-            int rightY = y + yOffset;
-            pintarNodo(nodo.getDerecha(), g, rightX, rightY);
-
-            if (nodo.getIzquierda() != null) {
-
-                drawArrow(g, x, y, leftX, leftY, 50);
-            }
-
-            if (nodo.getDerecha() != null) {
-
-                drawArrow(g, x, y, rightX, rightY, 50);
-            }
-
-            g.setColor(Color.BLUE);
-
-            int radius = 15;
-
-            g.fillOval(x - radius, y - radius, 2 * radius, 2 * radius);
-
-            g.setColor(Color.BLACK);
-
-            g.drawString(String.valueOf(nodo.getValor()), x - 5, y + 5);
-        }
-    }
-
+    pintarNodo(arbol.getRaiz(), g, startX, startY, 1);
+}
     private void drawArrow(Graphics g, int x1, int y1, int x2, int y2, int lineLength) {
         int arrowSize = 5;
 
@@ -455,17 +444,6 @@ public class InterfazMenu extends javax.swing.JFrame {
         arbol.insertaNodo(valor, arbol.getRaiz());
     }
 
-    public void preOrden() {
-        arbol.recorridoPreOrden(arbol.getRaiz());
-    }
-
-    public void postOrden() {
-        arbol.recorridoPostOrden(arbol.getRaiz());
-    }
-
-    public void inOrden() {
-        arbol.recorridoInorden(arbol.getRaiz());
-    }
 
     /**
      * @param args the command line arguments
@@ -507,6 +485,7 @@ public class InterfazMenu extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Background;
     private javax.swing.JPanel Canvas;
+    private javax.swing.JLabel ResultadoTEXT;
     private javax.swing.JButton eliminarUnNumeroB;
     private javax.swing.JButton encontrarNodosNivelB;
     private javax.swing.JButton generarNumerosB;
