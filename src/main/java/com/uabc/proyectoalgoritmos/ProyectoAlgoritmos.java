@@ -15,9 +15,9 @@ public class ProyectoAlgoritmos {
 
     public static void main(String[] args) {
         
-        InterfazMenu ide =new InterfazMenu();
+        /*InterfazMenu ide =new InterfazMenu();
         ide.setVisible(true);
-        ide.setLocationRelativeTo(null); 
+        ide.setLocationRelativeTo(null); */
         
         
         ProyectoAlgoritmos proyecto= new ProyectoAlgoritmos();
@@ -47,18 +47,21 @@ public class ProyectoAlgoritmos {
                 
                 case 2:
                     agregarDatosArrayList();
+                    arbol.setRaiz(arbol.Balancea(arbol.getRaiz()));
                 break;
                 
                 case 3:
                     System.out.println("Escribe valor");
                     valor=entrada.nextInt();
                     agregarDato(valor);
+                    arbol.setRaiz(arbol.Balancea(arbol.getRaiz()));
                 break;
                 
                 case 4:
                     System.out.println("Escribe el valor a eliminar: ");
                     valor=entrada.nextInt();
                     arbol.eliminarRecursivo(arbol.getRaiz(),valor);
+                    arbol.setRaiz(arbol.Balancea(arbol.getRaiz()));
                 break;
                 
                 case 5:

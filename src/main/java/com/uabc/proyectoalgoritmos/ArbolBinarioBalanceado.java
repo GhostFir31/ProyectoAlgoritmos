@@ -131,6 +131,9 @@ public class ArbolBinarioBalanceado {
         return raiz;
     }
     
+    public void setRaiz(Nodo raiz){
+        this.raiz=raiz;        
+    }
 
     public String obtenerCodigo(Nodo r,int valor){
         
@@ -193,6 +196,7 @@ public class ArbolBinarioBalanceado {
         return actual;
     }
     // omar
+    
     public void mostrarArbol(ArbolBinarioBalanceado arbol) {
         if (arbol.getRaiz() == null) {
             System.out.println("Arbol vacío");
