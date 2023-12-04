@@ -60,7 +60,6 @@ public class InterfazMenu extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
         titulo = new javax.swing.JLabel();
         generarNumerosB = new javax.swing.JButton();
         insertaNumerosB = new javax.swing.JButton();
@@ -78,10 +77,8 @@ public class InterfazMenu extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
         titulo.setIcon(new javax.swing.ImageIcon("C:\\Users\\omar-\\OneDrive\\Documentos\\NetBeansProjects\\ProyectoAlgoritmos\\src\\main\\java\\com\\uabc\\proyectoalgoritmos\\assets\\titulo2.png")); // NOI18N
-        jPanel1.add(titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 10, 590, -1));
+        getContentPane().add(titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 10, 590, -1));
 
         generarNumerosB.setText("Generar Numeros");
         generarNumerosB.addActionListener(new java.awt.event.ActionListener() {
@@ -89,7 +86,7 @@ public class InterfazMenu extends javax.swing.JFrame {
                 generarNumerosBActionPerformed(evt);
             }
         });
-        jPanel1.add(generarNumerosB, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 160, -1));
+        getContentPane().add(generarNumerosB, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 160, -1));
 
         insertaNumerosB.setText("Inserta Numeros");
         insertaNumerosB.addActionListener(new java.awt.event.ActionListener() {
@@ -97,7 +94,7 @@ public class InterfazMenu extends javax.swing.JFrame {
                 insertaNumerosBActionPerformed(evt);
             }
         });
-        jPanel1.add(insertaNumerosB, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 160, -1));
+        getContentPane().add(insertaNumerosB, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 160, -1));
 
         insertarUnNumeroB.setText("Insertar un Numero");
         insertarUnNumeroB.addActionListener(new java.awt.event.ActionListener() {
@@ -105,7 +102,7 @@ public class InterfazMenu extends javax.swing.JFrame {
                 insertarUnNumeroBActionPerformed(evt);
             }
         });
-        jPanel1.add(insertarUnNumeroB, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 160, -1));
+        getContentPane().add(insertarUnNumeroB, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 160, -1));
 
         eliminarUnNumeroB.setText("Eliminar un Numero");
         eliminarUnNumeroB.addActionListener(new java.awt.event.ActionListener() {
@@ -113,7 +110,7 @@ public class InterfazMenu extends javax.swing.JFrame {
                 eliminarUnNumeroBActionPerformed(evt);
             }
         });
-        jPanel1.add(eliminarUnNumeroB, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, 160, -1));
+        getContentPane().add(eliminarUnNumeroB, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, 160, -1));
 
         recorrerPreOrdenB.setText("Recorrer PreOrden");
         recorrerPreOrdenB.addActionListener(new java.awt.event.ActionListener() {
@@ -121,7 +118,7 @@ public class InterfazMenu extends javax.swing.JFrame {
                 recorrerPreOrdenBActionPerformed(evt);
             }
         });
-        jPanel1.add(recorrerPreOrdenB, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 260, 160, -1));
+        getContentPane().add(recorrerPreOrdenB, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 260, 160, -1));
 
         recorrerPostOrdenB.setText("Recorrer PostOrden");
         recorrerPostOrdenB.addActionListener(new java.awt.event.ActionListener() {
@@ -129,7 +126,7 @@ public class InterfazMenu extends javax.swing.JFrame {
                 recorrerPostOrdenBActionPerformed(evt);
             }
         });
-        jPanel1.add(recorrerPostOrdenB, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 300, 160, -1));
+        getContentPane().add(recorrerPostOrdenB, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 300, 160, -1));
 
         recorrerInOrdenB.setText("Recorrer InOrden");
         recorrerInOrdenB.addActionListener(new java.awt.event.ActionListener() {
@@ -137,7 +134,7 @@ public class InterfazMenu extends javax.swing.JFrame {
                 recorrerInOrdenBActionPerformed(evt);
             }
         });
-        jPanel1.add(recorrerInOrdenB, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 340, 160, -1));
+        getContentPane().add(recorrerInOrdenB, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 340, 160, -1));
 
         recorrerPorNivelB.setText("Recorrer Por Nivel");
         recorrerPorNivelB.addActionListener(new java.awt.event.ActionListener() {
@@ -145,7 +142,7 @@ public class InterfazMenu extends javax.swing.JFrame {
                 recorrerPorNivelBActionPerformed(evt);
             }
         });
-        jPanel1.add(recorrerPorNivelB, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 380, 160, -1));
+        getContentPane().add(recorrerPorNivelB, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 380, 160, -1));
 
         encontrarNodosNivelB.setText("Encontrar Nodos Nivel");
         encontrarNodosNivelB.addActionListener(new java.awt.event.ActionListener() {
@@ -153,7 +150,7 @@ public class InterfazMenu extends javax.swing.JFrame {
                 encontrarNodosNivelBActionPerformed(evt);
             }
         });
-        jPanel1.add(encontrarNodosNivelB, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 420, 160, -1));
+        getContentPane().add(encontrarNodosNivelB, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 420, 160, -1));
 
         obtenerCodigoB.setText("Obtener Codigo ");
         obtenerCodigoB.addActionListener(new java.awt.event.ActionListener() {
@@ -161,7 +158,7 @@ public class InterfazMenu extends javax.swing.JFrame {
                 obtenerCodigoBActionPerformed(evt);
             }
         });
-        jPanel1.add(obtenerCodigoB, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 460, 160, -1));
+        getContentPane().add(obtenerCodigoB, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 460, 160, -1));
 
         Canvas.setBackground(new java.awt.Color(255, 255, 255));
         Canvas.setForeground(new java.awt.Color(0, 0, 0));
@@ -177,16 +174,14 @@ public class InterfazMenu extends javax.swing.JFrame {
             .addGap(0, 380, Short.MAX_VALUE)
         );
 
-        jPanel1.add(Canvas, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 100, 740, 380));
-        jPanel1.add(Background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 960, 500));
-
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        getContentPane().add(Canvas, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 100, 740, 380));
+        getContentPane().add(Background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 960, 500));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void obtenerCodigoBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_obtenerCodigoBActionPerformed
-        limpiarCanvas();
+       
         try {
             String numeroStr = JOptionPane.showInputDialog(null, new JLabel("Ingresar el numero que desea ver su codigo : "));
             if (numeroStr == null) {
@@ -284,9 +279,9 @@ public class InterfazMenu extends javax.swing.JFrame {
             System.out.println("Valor eliminado: " + valorEliminar);
 
             arbol.mostrarArbol(arbol);
-          
+
             pintarArbol(arbol);
-            
+
         } catch (NumberFormatException e) {
 
             JOptionPane.showMessageDialog(null, "Error: Ingrese valores numéricos válidos");
@@ -327,7 +322,6 @@ public class InterfazMenu extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "No se ha generado lista");
 
         }
-
     }//GEN-LAST:event_insertaNumerosBActionPerformed
 
     private void generarNumerosBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generarNumerosBActionPerformed
@@ -510,7 +504,6 @@ public class InterfazMenu extends javax.swing.JFrame {
     private javax.swing.JButton generarNumerosB;
     private javax.swing.JButton insertaNumerosB;
     private javax.swing.JButton insertarUnNumeroB;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JButton obtenerCodigoB;
     private javax.swing.JButton recorrerInOrdenB;
     private javax.swing.JButton recorrerPorNivelB;
