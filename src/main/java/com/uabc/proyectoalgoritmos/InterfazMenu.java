@@ -181,7 +181,7 @@ public class InterfazMenu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void obtenerCodigoBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_obtenerCodigoBActionPerformed
-       
+
         try {
             String numeroStr = JOptionPane.showInputDialog(null, new JLabel("Ingresar el numero que desea ver su codigo : "));
             if (numeroStr == null) {
@@ -277,9 +277,9 @@ public class InterfazMenu extends javax.swing.JFrame {
             arbol.eliminarRecursivo(arbol.raiz, valorEliminar);
 
             System.out.println("Valor eliminado: " + valorEliminar);
-
+            arbol.setRaiz(arbol.Balancea(arbol.getRaiz()));
             arbol.mostrarArbol(arbol);
-
+            
             pintarArbol(arbol);
 
         } catch (NumberFormatException e) {
@@ -303,6 +303,7 @@ public class InterfazMenu extends javax.swing.JFrame {
             agregarDato(valorInsertado);
 
             System.out.println("Valor Agregado: " + valorInsertado);
+            arbol.setRaiz(arbol.Balancea(arbol.getRaiz()));
             arbol.mostrarArbol(arbol);
             pintarArbol(arbol);
         } catch (NumberFormatException e) {
@@ -314,8 +315,9 @@ public class InterfazMenu extends javax.swing.JFrame {
     private void insertaNumerosBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertaNumerosBActionPerformed
 
         if (!lista.isEmpty()) {
-            this.arbol=new ArbolBinarioBalanceado();
+            this.arbol = new ArbolBinarioBalanceado();
             agregarDatosArrayList();
+            arbol.setRaiz(arbol.Balancea(arbol.getRaiz()));
             arbol.mostrarArbol(arbol);
             pintarArbol(arbol);
         } else {
@@ -326,6 +328,8 @@ public class InterfazMenu extends javax.swing.JFrame {
 
     private void generarNumerosBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generarNumerosBActionPerformed
         limpiarCanvas();
+        lista=new ArrayList();
+        arbol=new ArbolBinarioBalanceado();
         try {
             String valorMaximoStr = JOptionPane.showInputDialog(null, new JLabel("Ingresar el valor máximo: "));
 
@@ -416,9 +420,9 @@ public class InterfazMenu extends javax.swing.JFrame {
     }
 
     private void limpiarCanvas() {
-       
+
         Graphics g = Canvas.getGraphics();
-    
+
         Canvas.setBackground(Color.WHITE);
         int width = Canvas.getWidth();
         int height = Canvas.getHeight();
@@ -430,6 +434,10 @@ public class InterfazMenu extends javax.swing.JFrame {
     private Icon icono(String ruta, int width, int height) {
         Icon img = new ImageIcon(new ImageIcon(getClass().getResource(ruta)).getImage().getScaledInstance(width, height, java.awt.Image.SCALE_SMOOTH));
         return img;
+    }
+
+    public void BalanceaArbol() {
+        arbol.Balancea(arbol.getRaiz());
     }
 
     public void agregarDatosArrayList() {
