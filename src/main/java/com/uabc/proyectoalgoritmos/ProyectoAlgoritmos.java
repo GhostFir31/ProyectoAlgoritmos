@@ -32,8 +32,9 @@ public class ProyectoAlgoritmos {
     public void mostrarMenu(){
         Scanner ent = new Scanner(System.in);
         int opcion, valor;
+        StringBuilder codigoInvertido;
         
-            System.out.println("1... Generar ArrayList\n2... Insertar ArrayList\n3... Inserta Numero\n4... Eliminar Dato \n5...PreOrden\n6... PostOrden\n7... Inorden");
+            System.out.println("1... Generar ArrayList\n2... Insertar ArrayList\n3... Inserta Numero\n4... Eliminar Dato \n5...PreOrden\n6... PostOrden\n7... Inorden\n10... Código");
             System.out.println("Escoge opción");
             opcion = ent.nextInt();
             
@@ -57,7 +58,7 @@ public class ProyectoAlgoritmos {
                 case 4:
                     System.out.println("Escribe el valor a eliminar: ");
                     valor=entrada.nextInt();
-                    arbol.eliminarRecursivo(arbol.raiz,valor);
+                    arbol.eliminarRecursivo(arbol.getRaiz(),valor);
                 break;
                 
                 case 5:
@@ -71,15 +72,26 @@ public class ProyectoAlgoritmos {
                 case 7:
                     inOrden();
                 break;
+                
+                case 10:
+                    System.out.println("Escribe el valor a codigicar: ");
+                    valor=entrada.nextInt();
+                    codigoInvertido = new StringBuilder(arbol.obtenerCodigo(arbol.getRaiz(), valor));
+                    System.out.println("Codigo: "+codigoInvertido);
+                    codigoInvertido.reverse();
+                    System.out.println("Codigo Invertido: "+codigoInvertido);
+                break;
             }
     }
-    
+        
     public void agregarDatosArrayList(){
         int n = arreglo.size();
         
         if(n!=0)
             for(int i =0;i<n;i++)
                 agregarDato(arreglo.get(i));
+        
+        //BalanceaArbol();
     }
     
     public void agregarDato(int valor){
@@ -96,14 +108,27 @@ public class ProyectoAlgoritmos {
     }
     
     public void preOrden(){
-        arbol.recorridoPreOrden(arbol.getRaiz());
+        String text = "";
+        
+        text = arbol.recorridoPreOrden(arbol.getRaiz());
+        System.out.println(text);
     }
     
     public void postOrden(){
-        arbol.recorridoPostOrden(arbol.getRaiz());
+        String text = "";
+        
+        text = arbol.recorridoPostOrden(arbol.getRaiz());
+        System.out.println(text);
     }
     
     public void inOrden(){
-        arbol.recorridoInorden(arbol.getRaiz());
+        String text = "";
+        
+        text = arbol.recorridoInorden(arbol.getRaiz());
+        System.out.println(text);
+    }
+    
+    public void BalanceaArbol(){
+        arbol.Balancea(arbol.getRaiz());
     }
 }

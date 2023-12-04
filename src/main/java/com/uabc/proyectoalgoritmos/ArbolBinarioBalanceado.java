@@ -1,7 +1,10 @@
 package com.uabc.proyectoalgoritmos;
 
+
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
+
 
 public class ArbolBinarioBalanceado {
     Nodo raiz;
@@ -74,52 +77,121 @@ public class ArbolBinarioBalanceado {
         return actual;
     }
     
-    public void recorridoPreOrden(Nodo r){
+    public String recorridoPreOrden(Nodo r){
         Nodo actual=r,padre;
+        String text="";
         if(actual==null)
-            System.out.println("Arbol vacío");
+            text = "Arbol vacío";
         else{
             if(actual.getIzquierda()!=null){
-                System.out.println("["+actual.getValor()+"]");
-                recorridoPreOrden(actual.getIzquierda());
+                text = text+"["+actual.getValor()+"]";
+                text = text+recorridoPreOrden(actual.getIzquierda());
             }
             else
-                System.out.println("["+actual.getValor()+"]");
+                text = text+"["+actual.getValor()+"]";
 
             if(actual.getDerecha()!=null){
-                recorridoPreOrden(actual.getDerecha());
+                text = text + recorridoPreOrden(actual.getDerecha());
             }
-        }         
+        }
+        
+        return text;
     }
     
-    public void recorridoPostOrden(Nodo r){
+    public String recorridoPostOrden(Nodo r){
+        String text = "";
         if(r==null)
-            System.out.println("Arbol vacío");
+            text = "Arbol vacío";
         else{
             if(r.getIzquierda()!=null)
-                recorridoPostOrden(r.getIzquierda());
+                text = text + recorridoPostOrden(r.getIzquierda());
             
             if(r.getDerecha()!=null)
-                recorridoPostOrden(r.getDerecha());
+                text = text + recorridoPostOrden(r.getDerecha());
             
-            System.out.println("["+r.getValor()+"]");
+            text = text + "["+r.getValor()+"]";
         }
+        return text;
     }
     
-    public void recorridoInorden(Nodo r){
+    public String recorridoInorden(Nodo r){
+        String text = "";
         if(r.getIzquierda()!=null)
-            recorridoInorden(r.getIzquierda());
+            text = text + recorridoInorden(r.getIzquierda());
         
-        System.out.println("["+r.getValor()+"]");
+        text = text + "["+r.getValor()+"]";
         
         if(r.getDerecha()!=null)
-            recorridoInorden(r.getDerecha());
+            text = text + recorridoInorden(r.getDerecha());
+        
+        return text;
     }
     
     public Nodo getRaiz(){
         return raiz;
     }
     
+
+    public String obtenerCodigo(Nodo r,int valor){
+        
+        if(r==null)
+            return "vacio";
+        else{
+            if(valor==r.getValor())
+                return "";
+            else{
+                if(valor<r.getValor())//Si el valor dado es menor que el valor del nodo actual
+                    if(r.getIzquierda()!=null)//si el hijo de la izq es dif a null
+                        return "0"+obtenerCodigo(r.getIzquierda(),valor);
+                    else
+                        return "[No existe el número en el arbol]";
+                else{
+                    if(valor>r.getValor())
+                        if(r.getDerecha()!=null)
+                            return "1"+obtenerCodigo(r.getDerecha(),valor);
+                        else
+                            return "[No existe el número en el arbol]";
+                    else
+                        return "Es igual";
+                }
+            }
+        }
+    }
+    
+    public Nodo Balancea(Nodo r){
+        if(r==null){
+            return null;
+        }
+        
+        //Obtener lista de nodos en orden
+        ArrayList<Nodo> nodos = new ArrayList<>();
+        enOrden(r,nodos);
+        
+        //construir un árbol balanceado en base a una lista ordenada
+        return creaBalanceado(nodos,0,nodos.size()-1);
+    }
+    
+    public void enOrden(Nodo r,ArrayList<Nodo> nodos){
+        if(r==null)
+            return;
+        
+        enOrden(r.getIzquierda(),nodos);
+        nodos.add(r);
+        enOrden(r.getDerecha(),nodos);
+    }
+    
+    public Nodo creaBalanceado(ArrayList<Nodo> nodos, int inicio, int fin){
+        if(inicio>fin)
+            return null;
+        
+        int mid = (inicio+fin)/2;
+        Nodo actual = nodos.get(mid);
+        
+        actual.setIzquierda(creaBalanceado(nodos,inicio,mid-1));
+        actual.setDerecha(creaBalanceado(nodos,mid+1,fin));
+        
+        return actual;
+    }
     // omar
     public void mostrarArbol(ArbolBinarioBalanceado arbol) {
         if (arbol.getRaiz() == null) {
