@@ -227,4 +227,65 @@ public class ArbolBinarioBalanceado {
 
         return actual;
     }
+
+    public String recorridoPorNiveles(Nodo raiz) {
+        if (raiz == null) {
+            return "El árbol está vacío.";
+        }
+
+        StringBuilder resultado = new StringBuilder();
+        Queue<Nodo> cola = new LinkedList<>();
+        cola.add(raiz);
+
+        while (!cola.isEmpty()) {
+            Nodo nodoActual = cola.poll();
+            resultado.append(nodoActual.getValor()).append(" ");
+
+            if (nodoActual.getIzquierda() != null) {
+                cola.add(nodoActual.getIzquierda());
+            }
+
+            if (nodoActual.getDerecha() != null) {
+                cola.add(nodoActual.getDerecha());
+            }
+        }
+
+        return resultado.toString().trim();  // Devolver como cadena, eliminando el espacio final
+    }
+
+    public String muestraNivel(Nodo raiz, int nivelDeseado) {
+        if (raiz == null) {
+            return "El árbol está vacío.";
+        }
+
+        StringBuilder resultado = new StringBuilder();
+        Queue<Nodo> cola = new LinkedList<>();
+        cola.add(raiz);
+
+        int nivelActual = 0;
+
+        while (!cola.isEmpty() && nivelActual <= nivelDeseado) {
+            int nodosEnNivel = cola.size();
+            for (int i = 0; i < nodosEnNivel; i++) {
+                Nodo nodoActual = cola.poll();
+
+                if (nivelActual == nivelDeseado) {
+                   
+                    resultado.append(nodoActual.getValor()).append(" ");
+                }
+
+                if (nodoActual.getIzquierda() != null) {
+                    cola.add(nodoActual.getIzquierda());
+                }
+
+                if (nodoActual.getDerecha() != null) {
+                    cola.add(nodoActual.getDerecha());
+                }
+            }
+
+            nivelActual++;
+        }
+
+        return resultado.toString().trim();  
+    }
 }

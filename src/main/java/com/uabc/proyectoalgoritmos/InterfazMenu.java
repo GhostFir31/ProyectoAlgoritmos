@@ -181,7 +181,7 @@ public class InterfazMenu extends javax.swing.JFrame {
                 return;
             }
             int numero = Integer.parseInt(numeroStr);
-
+            ResultadoTEXT.setText("El codigo del valor es: "+arbol.obtenerCodigo(arbol.getRaiz(),numero));
             System.out.println("numero a buscar codigo: " + numero);
 
         } catch (NumberFormatException e) {
@@ -199,7 +199,7 @@ public class InterfazMenu extends javax.swing.JFrame {
                 return;
             }
             int nivel = Integer.parseInt(nivelStr);
-
+            ResultadoTEXT.setText("Nodos del Nivel= "+arbol.muestraNivel(arbol.getRaiz(),nivel) );
             System.out.println("nivel seleccionado: " + nivel);
 
         } catch (NumberFormatException e) {
@@ -211,6 +211,7 @@ public class InterfazMenu extends javax.swing.JFrame {
     private void recorrerPorNivelBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_recorrerPorNivelBActionPerformed
 
         if (arbol.getRaiz() != null) {
+            ResultadoTEXT.setText("Recorrido= "+arbol.recorridoPorNiveles(arbol.getRaiz()));
 
         } else {
             JOptionPane.showMessageDialog(null, "No se ha creado el arbol");
