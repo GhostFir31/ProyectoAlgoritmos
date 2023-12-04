@@ -81,7 +81,7 @@ public class InterfazMenu extends javax.swing.JFrame {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         titulo.setIcon(new javax.swing.ImageIcon("C:\\Users\\omar-\\OneDrive\\Documentos\\NetBeansProjects\\ProyectoAlgoritmos\\src\\main\\java\\com\\uabc\\proyectoalgoritmos\\assets\\titulo2.png")); // NOI18N
-        jPanel1.add(titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, 590, -1));
+        jPanel1.add(titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 10, 590, -1));
 
         generarNumerosB.setText("Generar Numeros");
         generarNumerosB.addActionListener(new java.awt.event.ActionListener() {
@@ -170,15 +170,15 @@ public class InterfazMenu extends javax.swing.JFrame {
         Canvas.setLayout(CanvasLayout);
         CanvasLayout.setHorizontalGroup(
             CanvasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 470, Short.MAX_VALUE)
+            .addGap(0, 740, Short.MAX_VALUE)
         );
         CanvasLayout.setVerticalGroup(
             CanvasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 380, Short.MAX_VALUE)
         );
 
-        jPanel1.add(Canvas, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 100, 470, 380));
-        jPanel1.add(Background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 690, 500));
+        jPanel1.add(Canvas, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 100, 740, 380));
+        jPanel1.add(Background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 960, 500));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
@@ -319,6 +319,7 @@ public class InterfazMenu extends javax.swing.JFrame {
     private void insertaNumerosBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertaNumerosBActionPerformed
 
         if (!lista.isEmpty()) {
+            this.arbol=new ArbolBinarioBalanceado();
             agregarDatosArrayList();
             arbol.mostrarArbol(arbol);
             pintarArbol(arbol);
@@ -330,6 +331,7 @@ public class InterfazMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_insertaNumerosBActionPerformed
 
     private void generarNumerosBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generarNumerosBActionPerformed
+        limpiarCanvas();
         try {
             String valorMaximoStr = JOptionPane.showInputDialog(null, new JLabel("Ingresar el valor máximo: "));
 
@@ -502,8 +504,6 @@ public class InterfazMenu extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Background;
-    private javax.swing.JPanel Canva;
-    private javax.swing.JPanel Canva1;
     private javax.swing.JPanel Canvas;
     private javax.swing.JButton eliminarUnNumeroB;
     private javax.swing.JButton encontrarNodosNivelB;
