@@ -27,7 +27,7 @@ public class ProyectoAlgoritmos {
         Scanner ent = new Scanner(System.in);
         int opcion, valor;
         
-            System.out.println("1... Generar ArrayList\n2... Insertar ArrayList\n3... Inserta Numero\n4... Eliminar Dato \n5...PreOrden\n6... PostOrden\n7... Inorden");
+            System.out.println("1... Generar ArrayList\n2... Insertar ArrayList\n3... Inserta Numero\n4... Eliminar Dato \n5...PreOrden\n6... PostOrden\n7... Inorden\n8... Mostrar por nivel\n9... Elegir Nivel");
             System.out.println("Escoge opción");
             opcion = ent.nextInt();
             
@@ -68,6 +68,10 @@ public class ProyectoAlgoritmos {
                 case 8:
                     arbol.recorridoPorNiveles(arbol.raiz);
                 break;
+                case 9:
+                    System.out.println("Escribe el nivel: ");
+                    valor=entrada.nextInt();
+                    arbol.muestraNivel(arbol.raiz,valor);
             }
     }
     

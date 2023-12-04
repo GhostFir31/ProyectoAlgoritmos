@@ -4,7 +4,8 @@ import java.util.Queue;
 
 public class ArbolBinarioBalanceado {
     Nodo raiz;
-    
+    String[] niveles;
+    int altura;
     public ArbolBinarioBalanceado(){
         this.raiz=null;
     }
@@ -137,4 +138,41 @@ public class ArbolBinarioBalanceado {
         }
         System.out.println();  // Agregar una nueva línea al final
     }
+    
+    public void muestraNivel(Nodo raiz, int nivelDeseado) {
+        if (raiz == null) {
+            System.out.println("El árbol está vacío.");
+            return;
+        }
+
+    Queue<Nodo> cola = new LinkedList<>();
+    cola.add(raiz);
+
+    int nivelActual = 0;
+
+    while (!cola.isEmpty() && nivelActual <= nivelDeseado) {
+        int nodosEnNivel = cola.size();
+            for (int i = 0; i < nodosEnNivel; i++) {
+                Nodo nodoActual = cola.poll();
+
+                if (nivelActual == nivelDeseado) {
+                    // Mostrar datos del nodo en el nivel deseado
+                    System.out.print(nodoActual.getValor() + " ");
+                }
+
+                if (nodoActual.getIzquierda() != null) {
+                    cola.add(nodoActual.getIzquierda());
+                }
+
+                if (nodoActual.getDerecha() != null) {
+                    cola.add(nodoActual.getDerecha());
+                }
+            }
+
+            nivelActual++;
+        }
+
+        System.out.println();  // Agregar una nueva línea al final
+    }
+
 }
