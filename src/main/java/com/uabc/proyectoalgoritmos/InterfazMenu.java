@@ -4,15 +4,15 @@
  */
 package com.uabc.proyectoalgoritmos;
 
-import java.awt.BorderLayout;
 import java.awt.Image;
 import java.util.ArrayList;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.*;
-import javax.swing.tree.DefaultMutableTreeNode;
+import java.awt.Color;
+import java.awt.Graphics;
+
 /**
  *
  * @author JesusOmar Leal
@@ -33,7 +33,7 @@ public class InterfazMenu extends javax.swing.JFrame {
     private ArbolBinarioBalanceado arbol = new ArbolBinarioBalanceado();
 
     public InterfazMenu() {
-        
+
         initComponents();
 
         this.setImagen(titulo, rutaAssets + "titulo2.png");
@@ -222,7 +222,7 @@ public class InterfazMenu extends javax.swing.JFrame {
         if (arbol.getRaiz() != null) {
 
         } else {
-            JOptionPane.showMessageDialog(null, "No se a creado el arbol");
+            JOptionPane.showMessageDialog(null, "No se ha creado el arbol");
 
         }
     }//GEN-LAST:event_recorrerPorNivelBActionPerformed
@@ -232,7 +232,7 @@ public class InterfazMenu extends javax.swing.JFrame {
             System.out.println("Inorden:");
             inOrden();
         } else {
-            JOptionPane.showMessageDialog(null, "No se a creado el arbol");
+            JOptionPane.showMessageDialog(null, "No se ha creado el arbol");
 
         }
     }//GEN-LAST:event_recorrerInOrdenBActionPerformed
@@ -243,7 +243,7 @@ public class InterfazMenu extends javax.swing.JFrame {
             System.out.println("Postorden:");
             postOrden();
         } else {
-            JOptionPane.showMessageDialog(null, "No se a creado el arbol");
+            JOptionPane.showMessageDialog(null, "No se ha creado el arbol");
 
         }
     }//GEN-LAST:event_recorrerPostOrdenBActionPerformed
@@ -253,7 +253,7 @@ public class InterfazMenu extends javax.swing.JFrame {
             System.out.println("Preorden:");
             preOrden();
         } else {
-            JOptionPane.showMessageDialog(null, "No se a creado el arbol");
+            JOptionPane.showMessageDialog(null, "No se ha creado el arbol");
 
         }
     }//GEN-LAST:event_recorrerPreOrdenBActionPerformed
@@ -301,12 +301,12 @@ public class InterfazMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_insertarUnNumeroBActionPerformed
 
     private void insertaNumerosBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertaNumerosBActionPerformed
-        if (arbol.getRaiz() != null) {
+        if (!lista.isEmpty()) {
             agregarDatosArrayList();
             arbol.mostrarArbol(arbol);
-
+            pintarArbol(arbol);
         } else {
-            JOptionPane.showMessageDialog(null, "No se a creado el arbol");
+            JOptionPane.showMessageDialog(null, "No se ha generado lista");
 
         }
 
@@ -342,6 +342,75 @@ public class InterfazMenu extends javax.swing.JFrame {
 
         }
     }//GEN-LAST:event_generarNumerosBActionPerformed
+    private void pintarArbol(ArbolBinarioBalanceado arbol) {
+        Graphics g = Canvas.getGraphics();
+        g.setColor(Color.BLACK);
+
+        int startX = Canvas.getWidth() / 2;
+        int startY = 50; // You can adjust the starting Y position
+
+        pintarNodo(arbol.getRaiz(), g, startX, startY);
+    }
+
+private void pintarNodo(Nodo nodo, Graphics g, int x, int y) {
+    if (nodo != null) {
+        // Calculate positions for the children
+        int xOffset = 60;  // Ajusta este valor para cambiar la separación horizontal
+        int yOffset = 30;  // Ajusta este valor para cambiar la separación vertical
+
+        // Recursively draw left child
+        int leftX = x - xOffset;
+        int leftY = y + yOffset;
+        pintarNodo(nodo.getIzquierda(), g, leftX, leftY);
+
+        // Recursively draw right child
+        int rightX = x + xOffset;  // Usa la misma lógica que para el hijo de la izquierda, solo suma xOffset a la coordenada x
+        int rightY = y + yOffset;
+        pintarNodo(nodo.getDerecha(), g, rightX, rightY);
+
+        // Draw lines only if the current node has children
+        if (nodo.getIzquierda() != null) {
+            // Draw line connecting current node to left child (connecting to the border)
+            drawArrow(g, x, y, leftX, leftY, 50); // Ajusta el último parámetro para la longitud de la línea
+        }
+
+        if (nodo.getDerecha() != null) {
+            // Draw line connecting current node to right child (connecting to the border)
+            drawArrow(g, x, y, rightX, rightY, 50); // Ajusta el último parámetro para la longitud de la línea
+        }
+
+        // Set color to blue
+        g.setColor(Color.BLUE);
+
+        // Adjust the radius for smaller circles
+        int radius = 15;
+
+        // Draw filled blue circle
+        g.fillOval(x - radius, y - radius, 2 * radius, 2 * radius);
+
+        // Reset color to black for text
+        g.setColor(Color.BLACK);
+
+        // Draw text (node value) at the center of the circle
+        g.drawString(String.valueOf(nodo.getValor()), x - 5, y + 5);
+    }
+}
+
+    private void drawArrow(Graphics g, int x1, int y1, int x2, int y2, int lineLength) {
+        int arrowSize = 5;
+
+        // Calculate the angle and coordinates for the tip of the arrow
+        double angle = Math.atan2(y2 - y1, x2 - x1);
+        int tipX = (int) (x1 + lineLength * Math.cos(angle));
+        int tipY = (int) (y1 + lineLength * Math.sin(angle));
+
+        // Draw line
+        g.drawLine(x1, y1, tipX, tipY);
+
+        // Draw arrowhead
+        g.drawLine(tipX, tipY, (int) (tipX - arrowSize * Math.cos(angle - Math.PI / 4)), (int) (tipY - arrowSize * Math.sin(angle - Math.PI / 4)));
+        g.drawLine(tipX, tipY, (int) (tipX - arrowSize * Math.cos(angle + Math.PI / 4)), (int) (tipY - arrowSize * Math.sin(angle + Math.PI / 4)));
+    }
 
     private Icon icono(String ruta, int width, int height) {
         Icon img = new ImageIcon(new ImageIcon(getClass().getResource(ruta)).getImage().getScaledInstance(width, height, java.awt.Image.SCALE_SMOOTH));
@@ -410,10 +479,8 @@ public class InterfazMenu extends javax.swing.JFrame {
         });
     }
     //Parte Canvas
-    
-    
-    
-    
+
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Background;
     private javax.swing.JPanel Canva;
