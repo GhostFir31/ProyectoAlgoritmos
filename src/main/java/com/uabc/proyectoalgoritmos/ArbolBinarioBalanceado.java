@@ -68,46 +68,54 @@ public class ArbolBinarioBalanceado {
         return actual;
     }
     
-    public void recorridoPreOrden(Nodo r){
+    public String recorridoPreOrden(Nodo r){
         Nodo actual=r,padre;
+        String text="";
         if(actual==null)
-            System.out.println("Arbol vacío");
+            text = "Arbol vacío";
         else{
             if(actual.getIzquierda()!=null){
-                System.out.println("["+actual.getValor()+"]");
-                recorridoPreOrden(actual.getIzquierda());
+                text = text+"["+actual.getValor()+"]";
+                text = text+recorridoPreOrden(actual.getIzquierda());
             }
             else
-                System.out.println("["+actual.getValor()+"]");
+                text = text+"["+actual.getValor()+"]";
 
             if(actual.getDerecha()!=null){
-                recorridoPreOrden(actual.getDerecha());
+                text = text + recorridoPreOrden(actual.getDerecha());
             }
-        }         
+        }
+        
+        return text;
     }
     
-    public void recorridoPostOrden(Nodo r){
+    public String recorridoPostOrden(Nodo r){
+        String text = "";
         if(r==null)
-            System.out.println("Arbol vacío");
+            text = "Arbol vacío";
         else{
             if(r.getIzquierda()!=null)
-                recorridoPostOrden(r.getIzquierda());
+                text = text + recorridoPostOrden(r.getIzquierda());
             
             if(r.getDerecha()!=null)
-                recorridoPostOrden(r.getDerecha());
+                text = text + recorridoPostOrden(r.getDerecha());
             
-            System.out.println("["+r.getValor()+"]");
+            text = text + "["+r.getValor()+"]";
         }
+        return text;
     }
     
-    public void recorridoInorden(Nodo r){
+    public String recorridoInorden(Nodo r){
+        String text = "";
         if(r.getIzquierda()!=null)
-            recorridoInorden(r.getIzquierda());
+            text = text + recorridoInorden(r.getIzquierda());
         
-        System.out.println("["+r.getValor()+"]");
+        text = text + "["+r.getValor()+"]";
         
         if(r.getDerecha()!=null)
-            recorridoInorden(r.getDerecha());
+            text = text + recorridoInorden(r.getDerecha());
+        
+        return text;
     }
     
     public Nodo getRaiz(){

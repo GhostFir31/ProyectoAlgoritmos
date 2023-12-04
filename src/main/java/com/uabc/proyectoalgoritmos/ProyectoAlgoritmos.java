@@ -85,7 +85,7 @@ public class ProyectoAlgoritmos {
             for(int i =0;i<n;i++)
                 agregarDato(arreglo.get(i));
         
-        BalanceaArbol();
+        //BalanceaArbol();
     }
     
     public void agregarDato(int valor){
@@ -102,15 +102,24 @@ public class ProyectoAlgoritmos {
     }
     
     public void preOrden(){
-        arbol.recorridoPreOrden(arbol.getRaiz());
+        String text = "";
+        
+        text = arbol.recorridoPreOrden(arbol.getRaiz());
+        System.out.println(text);
     }
     
     public void postOrden(){
-        arbol.recorridoPostOrden(arbol.getRaiz());
+        String text = "";
+        
+        text = arbol.recorridoPostOrden(arbol.getRaiz());
+        System.out.println(text);
     }
     
     public void inOrden(){
-        arbol.recorridoInorden(arbol.getRaiz());
+        String text = "";
+        
+        text = arbol.recorridoInorden(arbol.getRaiz());
+        System.out.println(text);
     }
     
     public void BalanceaArbol(){
