@@ -164,6 +164,7 @@ public class InterfazMenu extends javax.swing.JFrame {
         jPanel1.add(obtenerCodigoB, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 460, 160, -1));
 
         Canvas.setBackground(new java.awt.Color(255, 255, 255));
+        Canvas.setForeground(new java.awt.Color(0, 0, 0));
 
         javax.swing.GroupLayout CanvasLayout = new javax.swing.GroupLayout(Canvas);
         Canvas.setLayout(CanvasLayout);
@@ -185,6 +186,7 @@ public class InterfazMenu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void obtenerCodigoBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_obtenerCodigoBActionPerformed
+        limpiarCanvas();
         try {
             String numeroStr = JOptionPane.showInputDialog(null, new JLabel("Ingresar el numero que desea ver su codigo : "));
             if (numeroStr == null) {
@@ -202,6 +204,7 @@ public class InterfazMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_obtenerCodigoBActionPerformed
 
     private void encontrarNodosNivelBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_encontrarNodosNivelBActionPerformed
+
         try {
             String nivelStr = JOptionPane.showInputDialog(null, new JLabel("Ingresar el nivel del arbol que desea ver : "));
             if (nivelStr == null) {
@@ -219,6 +222,7 @@ public class InterfazMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_encontrarNodosNivelBActionPerformed
 
     private void recorrerPorNivelBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_recorrerPorNivelBActionPerformed
+
         if (arbol.getRaiz() != null) {
 
         } else {
@@ -228,9 +232,11 @@ public class InterfazMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_recorrerPorNivelBActionPerformed
 
     private void recorrerInOrdenBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_recorrerInOrdenBActionPerformed
+
         if (arbol.getRaiz() != null) {
             System.out.println("Inorden:");
             inOrden();
+            pintarArbol(arbol);
         } else {
             JOptionPane.showMessageDialog(null, "No se ha creado el arbol");
 
@@ -242,6 +248,7 @@ public class InterfazMenu extends javax.swing.JFrame {
         if (arbol.getRaiz() != null) {
             System.out.println("Postorden:");
             postOrden();
+            pintarArbol(arbol);
         } else {
             JOptionPane.showMessageDialog(null, "No se ha creado el arbol");
 
@@ -249,9 +256,11 @@ public class InterfazMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_recorrerPostOrdenBActionPerformed
 
     private void recorrerPreOrdenBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_recorrerPreOrdenBActionPerformed
+
         if (arbol.getRaiz() != null) {
             System.out.println("Preorden:");
             preOrden();
+            pintarArbol(arbol);
         } else {
             JOptionPane.showMessageDialog(null, "No se ha creado el arbol");
 
@@ -259,6 +268,7 @@ public class InterfazMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_recorrerPreOrdenBActionPerformed
 
     private void eliminarUnNumeroBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarUnNumeroBActionPerformed
+
         try {
             String valorEliminarStr = JOptionPane.showInputDialog(null, new JLabel("Ingresar el valor que deseas eliminar: "));
 
@@ -272,7 +282,11 @@ public class InterfazMenu extends javax.swing.JFrame {
             arbol.eliminarRecursivo(arbol.raiz, valorEliminar);
 
             System.out.println("Valor eliminado: " + valorEliminar);
+
             arbol.mostrarArbol(arbol);
+          
+            pintarArbol(arbol);
+            
         } catch (NumberFormatException e) {
 
             JOptionPane.showMessageDialog(null, "Error: Ingrese valores numéricos válidos");
@@ -280,6 +294,7 @@ public class InterfazMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_eliminarUnNumeroBActionPerformed
 
     private void insertarUnNumeroBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertarUnNumeroBActionPerformed
+
         try {
             String valorInsertadoStr = JOptionPane.showInputDialog(null, new JLabel("Ingresar el valor que deseas insertar: "));
 
@@ -294,6 +309,7 @@ public class InterfazMenu extends javax.swing.JFrame {
 
             System.out.println("Valor Agregado: " + valorInsertado);
             arbol.mostrarArbol(arbol);
+            pintarArbol(arbol);
         } catch (NumberFormatException e) {
 
             JOptionPane.showMessageDialog(null, "Error: Ingrese valores numéricos válidos");
@@ -301,6 +317,7 @@ public class InterfazMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_insertarUnNumeroBActionPerformed
 
     private void insertaNumerosBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertaNumerosBActionPerformed
+
         if (!lista.isEmpty()) {
             agregarDatosArrayList();
             arbol.mostrarArbol(arbol);
@@ -343,73 +360,75 @@ public class InterfazMenu extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_generarNumerosBActionPerformed
     private void pintarArbol(ArbolBinarioBalanceado arbol) {
+        limpiarCanvas();
         Graphics g = Canvas.getGraphics();
         g.setColor(Color.BLACK);
 
         int startX = Canvas.getWidth() / 2;
-        int startY = 50; // You can adjust the starting Y position
+        int startY = 50;
 
         pintarNodo(arbol.getRaiz(), g, startX, startY);
     }
 
-private void pintarNodo(Nodo nodo, Graphics g, int x, int y) {
-    if (nodo != null) {
-        // Calculate positions for the children
-        int xOffset = 60;  // Ajusta este valor para cambiar la separación horizontal
-        int yOffset = 30;  // Ajusta este valor para cambiar la separación vertical
+    private void pintarNodo(Nodo nodo, Graphics g, int x, int y) {
+        if (nodo != null) {
 
-        // Recursively draw left child
-        int leftX = x - xOffset;
-        int leftY = y + yOffset;
-        pintarNodo(nodo.getIzquierda(), g, leftX, leftY);
+            int xOffset = 60;
+            int yOffset = 30;
 
-        // Recursively draw right child
-        int rightX = x + xOffset;  // Usa la misma lógica que para el hijo de la izquierda, solo suma xOffset a la coordenada x
-        int rightY = y + yOffset;
-        pintarNodo(nodo.getDerecha(), g, rightX, rightY);
+            int leftX = x - xOffset;
+            int leftY = y + yOffset;
+            pintarNodo(nodo.getIzquierda(), g, leftX, leftY);
 
-        // Draw lines only if the current node has children
-        if (nodo.getIzquierda() != null) {
-            // Draw line connecting current node to left child (connecting to the border)
-            drawArrow(g, x, y, leftX, leftY, 50); // Ajusta el último parámetro para la longitud de la línea
+            int rightX = x + xOffset;
+            int rightY = y + yOffset;
+            pintarNodo(nodo.getDerecha(), g, rightX, rightY);
+
+            if (nodo.getIzquierda() != null) {
+
+                drawArrow(g, x, y, leftX, leftY, 50);
+            }
+
+            if (nodo.getDerecha() != null) {
+
+                drawArrow(g, x, y, rightX, rightY, 50);
+            }
+
+            g.setColor(Color.BLUE);
+
+            int radius = 15;
+
+            g.fillOval(x - radius, y - radius, 2 * radius, 2 * radius);
+
+            g.setColor(Color.BLACK);
+
+            g.drawString(String.valueOf(nodo.getValor()), x - 5, y + 5);
         }
-
-        if (nodo.getDerecha() != null) {
-            // Draw line connecting current node to right child (connecting to the border)
-            drawArrow(g, x, y, rightX, rightY, 50); // Ajusta el último parámetro para la longitud de la línea
-        }
-
-        // Set color to blue
-        g.setColor(Color.BLUE);
-
-        // Adjust the radius for smaller circles
-        int radius = 15;
-
-        // Draw filled blue circle
-        g.fillOval(x - radius, y - radius, 2 * radius, 2 * radius);
-
-        // Reset color to black for text
-        g.setColor(Color.BLACK);
-
-        // Draw text (node value) at the center of the circle
-        g.drawString(String.valueOf(nodo.getValor()), x - 5, y + 5);
     }
-}
 
     private void drawArrow(Graphics g, int x1, int y1, int x2, int y2, int lineLength) {
         int arrowSize = 5;
 
-        // Calculate the angle and coordinates for the tip of the arrow
         double angle = Math.atan2(y2 - y1, x2 - x1);
         int tipX = (int) (x1 + lineLength * Math.cos(angle));
         int tipY = (int) (y1 + lineLength * Math.sin(angle));
 
-        // Draw line
         g.drawLine(x1, y1, tipX, tipY);
 
-        // Draw arrowhead
         g.drawLine(tipX, tipY, (int) (tipX - arrowSize * Math.cos(angle - Math.PI / 4)), (int) (tipY - arrowSize * Math.sin(angle - Math.PI / 4)));
         g.drawLine(tipX, tipY, (int) (tipX - arrowSize * Math.cos(angle + Math.PI / 4)), (int) (tipY - arrowSize * Math.sin(angle + Math.PI / 4)));
+    }
+
+    private void limpiarCanvas() {
+       
+        Graphics g = Canvas.getGraphics();
+    
+        Canvas.setBackground(Color.WHITE);
+        int width = Canvas.getWidth();
+        int height = Canvas.getHeight();
+        g.clearRect(0, 0, width, height);
+
+        g.dispose();
     }
 
     private Icon icono(String ruta, int width, int height) {
