@@ -38,7 +38,7 @@ public class InterfazMenu extends javax.swing.JFrame {
 
         this.setImagen(titulo, rutaAssets + "titulo2.png");
         this.setImagen(Background, rutaAssets + "background.jpg");
-        // audio.playAudio();
+        //audio.playAudio();
 
     }
 
@@ -181,7 +181,7 @@ public class InterfazMenu extends javax.swing.JFrame {
                 return;
             }
             int numero = Integer.parseInt(numeroStr);
-            ResultadoTEXT.setText("El codigo del valor es: "+arbol.obtenerCodigo(arbol.getRaiz(),numero));
+            ResultadoTEXT.setText("El codigo del valor es: " + arbol.obtenerCodigo(arbol.getRaiz(), numero));
             System.out.println("numero a buscar codigo: " + numero);
 
         } catch (NumberFormatException e) {
@@ -199,7 +199,7 @@ public class InterfazMenu extends javax.swing.JFrame {
                 return;
             }
             int nivel = Integer.parseInt(nivelStr);
-            ResultadoTEXT.setText("Nodos del Nivel= "+arbol.muestraNivel(arbol.getRaiz(),nivel) );
+            ResultadoTEXT.setText("Nodos del Nivel= " + arbol.muestraNivel(arbol.getRaiz(), nivel));
             System.out.println("nivel seleccionado: " + nivel);
 
         } catch (NumberFormatException e) {
@@ -211,7 +211,7 @@ public class InterfazMenu extends javax.swing.JFrame {
     private void recorrerPorNivelBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_recorrerPorNivelBActionPerformed
 
         if (arbol.getRaiz() != null) {
-            ResultadoTEXT.setText("Recorrido= "+arbol.recorridoPorNiveles(arbol.getRaiz()));
+            ResultadoTEXT.setText("Recorrido= " + arbol.recorridoPorNiveles(arbol.getRaiz()));
 
         } else {
             JOptionPane.showMessageDialog(null, "No se ha creado el arbol");
@@ -223,7 +223,7 @@ public class InterfazMenu extends javax.swing.JFrame {
 
         if (arbol.getRaiz() != null) {
             System.out.println("Inorden:");
-            ResultadoTEXT.setText("InOrden= "+arbol.recorridoInorden(arbol.getRaiz()));
+            ResultadoTEXT.setText("InOrden= " + arbol.recorridoInorden(arbol.getRaiz()));
             pintarArbol(arbol);
         } else {
             JOptionPane.showMessageDialog(null, "No se ha creado el arbol");
@@ -235,7 +235,7 @@ public class InterfazMenu extends javax.swing.JFrame {
 
         if (arbol.getRaiz() != null) {
             System.out.println("Postorden:");
-            ResultadoTEXT.setText("PostOrden= "+arbol.recorridoPostOrden(arbol.getRaiz()));
+            ResultadoTEXT.setText("PostOrden= " + arbol.recorridoPostOrden(arbol.getRaiz()));
             pintarArbol(arbol);
         } else {
             JOptionPane.showMessageDialog(null, "No se ha creado el arbol");
@@ -247,7 +247,7 @@ public class InterfazMenu extends javax.swing.JFrame {
 
         if (arbol.getRaiz() != null) {
             System.out.println("Preorden:");
-            ResultadoTEXT.setText("PreOrden= "+arbol.recorridoPreOrden(arbol.getRaiz()));
+            ResultadoTEXT.setText("PreOrden= " + arbol.recorridoPreOrden(arbol.getRaiz()));
             pintarArbol(arbol);
         } else {
             JOptionPane.showMessageDialog(null, "No se ha creado el arbol");
@@ -352,50 +352,56 @@ public class InterfazMenu extends javax.swing.JFrame {
 
         }
     }//GEN-LAST:event_generarNumerosBActionPerformed
-private void pintarNodo(Nodo nodo, Graphics g, int x, int y, int nivel) {
-    if (nodo != null) {
-        int xOffset = 60;
-        int yOffset = 50;
 
-        int leftX = x - xOffset;
-        int leftY = y + yOffset;
-        pintarNodo(nodo.getIzquierda(), g, leftX, leftY, nivel + 1);
+    private void pintarNodo(Nodo nodo, Graphics g, int x, int y, int nivel) {
+        if (nodo != null) {
+            int baseXOffset = 80; // Separación base entre nodos
+            int baseYOffset = 0;
 
-        int rightX = x + xOffset;
-        int rightY = y + yOffset;
-        pintarNodo(nodo.getDerecha(), g, rightX, rightY, nivel + 1);
+            // Ajusta la separación horizontal en función del nivel
+            int xOffset = baseXOffset - nivel * 10; // Puedes ajustar este valor según tus preferencias
+            int yOffset = baseYOffset + nivel * 10; 
+            
+            int leftX = x - xOffset;
+            int leftY = y + yOffset;
+            pintarNodo(nodo.getIzquierda(), g, leftX, leftY, nivel + 1);
 
-        if (nodo.getIzquierda() != null) {
-            drawArrow(g, x, y, leftX, leftY, 50);
+            int rightX = x + xOffset;
+            int rightY = y + yOffset;
+            pintarNodo(nodo.getDerecha(), g, rightX, rightY, nivel + 1);
+
+            if (nodo.getIzquierda() != null) {
+                drawArrow(g, x, y, leftX, leftY, 50);
+            }
+
+            if (nodo.getDerecha() != null) {
+                drawArrow(g, x, y, rightX, rightY, 50);
+            }
+
+            g.setColor(Color.BLUE);
+
+            int radius = 15;
+
+            g.fillOval(x - radius, y - radius, 2 * radius, 2 * radius);
+
+            g.setColor(Color.BLACK);
+
+            g.drawString(String.valueOf(nodo.getValor()), x - 5, y + 5);
         }
-
-        if (nodo.getDerecha() != null) {
-            drawArrow(g, x, y, rightX, rightY, 50);
-        }
-
-        g.setColor(Color.BLUE);
-
-        int radius = 15;
-
-        g.fillOval(x - radius, y - radius, 2 * radius, 2 * radius);
-
-        g.setColor(Color.BLACK);
-
-        g.drawString(String.valueOf(nodo.getValor()), x - 5, y + 5);
     }
-}
 
 // Llamada inicial desde pintarArbol
-private void pintarArbol(ArbolBinarioBalanceado arbol) {
-    limpiarCanvas();
-    Graphics g = Canvas.getGraphics();
-    g.setColor(Color.BLACK);
+    private void pintarArbol(ArbolBinarioBalanceado arbol) {
+        limpiarCanvas();
+        Graphics g = Canvas.getGraphics();
+        g.setColor(Color.BLACK);
 
-    int startX = Canvas.getWidth() / 2;
-    int startY = 50;
+        int startX = Canvas.getWidth() / 2;
+        int startY = 50;
 
-    pintarNodo(arbol.getRaiz(), g, startX, startY, 1);
-}
+        pintarNodo(arbol.getRaiz(), g, startX, startY, 1);
+    }
+
     private void drawArrow(Graphics g, int x1, int y1, int x2, int y2, int lineLength) {
         int arrowSize = 5;
 
@@ -444,7 +450,6 @@ private void pintarArbol(ArbolBinarioBalanceado arbol) {
 
         arbol.insertaNodo(valor, arbol.getRaiz());
     }
-
 
     /**
      * @param args the command line arguments
