@@ -25,7 +25,7 @@ public class InterfazMenu extends javax.swing.JFrame {
     private ImageIcon imagen;
     private Icon icono;
     //Actualizar esta variable cada que se quiera ejecutar en un equipo nuevo
-    private String rutaAssets = "C:\\Users\\alan1\\Documents\\GitHub\\ProyectoAlgoritmos\\src\\main\\java\\com\\uabc\\proyectoalgoritmos\\assets\\";
+    private String rutaAssets = "/home/omarleal/NetBeansProjects/ProyectoAlgoritmos/src/main/java/com/uabc/proyectoalgoritmos/assets/";
     private final Audio audio = new Audio(rutaAssets);
     //*****************************************************************
     //Variables Funcionamiento*****************************************
